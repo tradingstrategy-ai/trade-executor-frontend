@@ -1,11 +1,17 @@
 /**
  * Load configured strategies.
+ *
+ * This is passed as the environment variables on the frontend on startup.
+ *
+ * The environment variable contains JSON configuration of strategies, as per configuration.ts.
  */
-export const typesenseConfig = ((env) => {
-	const strategiesList = env.STRATEGIES;
+export const strategyConfig = ((env) => {
+	const strategiesJSON = env.STRATEGIES;
 
-	if (!strategiesList) {
+	if (!strategiesJSON) {
 		console.warn('You need to configure STRATEGIES env');
 	}
-	return { strategyIds };
+
+	return JSON.parse(strategiesJSON as string);
 })(import.meta.env);
+

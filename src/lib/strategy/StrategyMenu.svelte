@@ -1,7 +1,9 @@
 <!--
 @component
 
-Display strategy status sidebar menu
+Display strategy menu in
+- Sidebar on a desktop browser
+- Overview page on a mobile browser
 
 -->
 <script lang="ts">
