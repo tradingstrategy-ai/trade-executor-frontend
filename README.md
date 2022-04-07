@@ -5,7 +5,15 @@ Web front for [trade executor](https://github.com/tradingstrategy-ai/trade-execu
 # Features
 
 - Uses Bootstrap 4 for the layout (to be compatible with [Trading Strategy frontend](https://github.com/tradingstrategy-ai/frontend))
-- Can
+
+# Running
+
+Load the demo config and start the dev server:
+
+```
+source scripts/demo.env
+npm run dev
+```
 
 # Writing components
 

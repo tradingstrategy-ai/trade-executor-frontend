@@ -1,26 +1,40 @@
-import {strategyConfig} from "../config";
+import { strategyConfig } from '../config';
 
+/**
+ * TypeScript helper for having frontend side configuration for strategies.
+ */
+export interface StrategyConfiguration {
+	/** Strategy id - used internally in the state files, etc. */
+	id: string;
 
-export class StrategyConfiguration {
+	/** Name displayed until we have loaded data from the server-side  */
+	name: string;
 
-    /** Strategy id - used internally in the state files, etc. */
-    id: string;
+	/** Webhook server URL */
+	url: string;
 
-    /** Name displayed until we have loaded data from the server-side  */
-    placeHolderName?: string;
-
-    /** Webhook server URL */
-    url: string;
-
-    getPlaceHolderName(): string {
-        return this.placeHolderName || this.id;
-    }
 }
-
 
 /**
  * Get list of configured strategies.
+ *
+ * Typedefs JSON load from the config.
  */
-export function getStrategyConfiguration(): StrategyConfiguration[] {
-    return strategyConfig;
+export function getConfiguredStrategies(): StrategyConfiguration[] {
+
+    if(!!strategyConfig) {
+        return strategyConfig;
+    }
+
+	return [];
+}
+
+export function getConfiguredStrategyById(id: string): StrategyConfiguration | null {
+    const strats = getConfiguredStrategies();
+    for(let strat of strats) {
+        if(strat.id == id) {
+            return strat;
+        }
+    }
+    return null;
 }

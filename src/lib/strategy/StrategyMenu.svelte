@@ -15,7 +15,7 @@ Display strategy menu in
 		<a class="nav-link" href="#">Overview</a>
 	</li>
 
-    <li class="nav-item">
+	<li class="nav-item">
 		<a class="nav-link" href="#">Performance</a>
 	</li>
 
@@ -37,12 +37,11 @@ Display strategy menu in
 		<a class="nav-link" href="#">Diagnostics</a>
 	</li>
 
-    <li class="nav-item">
+	<li class="nav-item">
 		<a class="nav-link" href="#">Logs</a>
 	</li>
 
-    <li class="nav-item">
+	<li class="nav-item">
 		<a class="nav-link" href="#">Strategy source</a>
 	</li>
-
 </ul>
