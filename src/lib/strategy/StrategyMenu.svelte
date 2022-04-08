@@ -7,7 +7,14 @@ Display strategy menu in
 
 -->
 <script lang="ts">
-	let frozenPositions = false;
+	import { portfolio } from './store';
+	import SummaryCount from './SummaryCount.svelte';
+
+    // Get summary counts for the menu.
+    // These will evaluate to int or null depending if the strategy has kind of positions
+	$: openPositions = $portfolio?.open_positions?.length;
+	$: frozenPositions = $portfolio?.frozen_positions?.length;
+    $: closedPositions = $portfolio?.closed_positions?.length;
 </script>
 
 <ul class="nav flex-column">
@@ -20,28 +27,35 @@ Display strategy menu in
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link" href="#">Open positions</a>
+		<a class="nav-link" href="#">Deposits and withdraws</a>
 	</li>
 
-	{#if frozenPositions}
+	<li class="nav-item">
+		<a class="nav-link" href="#">Open positions <SummaryCount count={openPositions} /></a>
+	</li>
+
+	{#if frozenPositions > 0}
 		<li class="nav-item">
-			<a class="nav-link" href="#">Frozen positiosn</a>
+			<a class="nav-link" href="#">Frozen positions <SummaryCount count={frozenPositions} /></a>
 		</li>
 	{/if}
 
+    {#if frozenPositions > 0}
+        <li class="nav-item">
+            <a class="nav-link" href="#">Closed positions <SummaryCount count={closedPositions} /></a>
+        </li>
+    {/if}
+
 	<li class="nav-item">
-		<a class="nav-link" href="#">Closed positions</a>
+		<a class="nav-link" href="#">Strategy source</a>
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link" href="#">Diagnostics</a>
+		<a class="nav-link" href="#">System metrics</a>
 	</li>
 
 	<li class="nav-item">
 		<a class="nav-link" href="#">Logs</a>
 	</li>
 
-	<li class="nav-item">
-		<a class="nav-link" href="#">Strategy source</a>
-	</li>
 </ul>

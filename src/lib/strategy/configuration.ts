@@ -12,7 +12,6 @@ export interface StrategyConfiguration {
 
 	/** Webhook server URL */
 	url: string;
-
 }
 
 /**
@@ -21,20 +20,19 @@ export interface StrategyConfiguration {
  * Typedefs JSON load from the config.
  */
 export function getConfiguredStrategies(): StrategyConfiguration[] {
-
-    if(!!strategyConfig) {
-        return strategyConfig;
-    }
+	if (!!strategyConfig) {
+		return strategyConfig;
+	}
 
 	return [];
 }
 
 export function getConfiguredStrategyById(id: string): StrategyConfiguration | null {
-    const strats = getConfiguredStrategies();
-    for(let strat of strats) {
-        if(strat.id == id) {
-            return strat;
-        }
-    }
-    return null;
+	const strats = getConfiguredStrategies();
+	for (let strat of strats) {
+		if (strat.id == id) {
+			return strat;
+		}
+	}
+	return null;
 }
