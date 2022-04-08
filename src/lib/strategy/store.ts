@@ -54,13 +54,17 @@ export async function loadStrategyState(id: string, name: string, webhookUrl: st
 		currentStrategy.set({ id, name, state: null, error: resp.statusText });
 	}
 
+    const state = await resp.json();
+
     // Hurray, our server managed to spit out a non-crashing reply
 	currentStrategy.set({
 		id,
 		name,
-		state: await resp.json(),
+		state,
 		error: null
 	});
+
+    console.log("Loaded strategy", id);
 }
 
 /**

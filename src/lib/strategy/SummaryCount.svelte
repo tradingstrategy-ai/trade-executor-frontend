@@ -12,9 +12,9 @@ Loaded:
 - Open positions (3)
 -->
 <script lang="ts">
-	export let count;
+	export let count: number;
 </script>
 
 {#if count}
-	<span class="summary-count">{{ count }}</span>
+	<span class="summary-count">({ count })</span>
 {/if}

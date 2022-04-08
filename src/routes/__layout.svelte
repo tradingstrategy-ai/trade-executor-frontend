@@ -1,7 +1,3 @@
-<script lang="ts">
-	import '../app.css';
-</script>
-
 <header>
 	<div class="container">
 		<nav class="navbar navbar-light bg-light">

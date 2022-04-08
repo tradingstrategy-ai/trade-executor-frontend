@@ -12,22 +12,19 @@ Display strategy menu in
 
     // Get summary counts for the menu.
     // These will evaluate to int or null depending if the strategy has kind of positions
-	$: openPositions = $portfolio?.open_positions?.length;
-	$: frozenPositions = $portfolio?.frozen_positions?.length;
-    $: closedPositions = $portfolio?.closed_positions?.length;
+	$: openPositions = Object.keys($portfolio?.open_positions || {}).length;
+	$: frozenPositions = Object.keys($portfolio?.frozen_positions || {}).length;
+    $: closedPositions = Object.keys($portfolio?.closed_positions || {}).length;
 </script>
 
 <ul class="nav flex-column">
+
 	<li class="nav-item">
 		<a class="nav-link" href="#">Overview</a>
 	</li>
 
 	<li class="nav-item">
 		<a class="nav-link" href="#">Performance</a>
-	</li>
-
-	<li class="nav-item">
-		<a class="nav-link" href="#">Deposits and withdraws</a>
 	</li>
 
 	<li class="nav-item">
@@ -45,6 +42,10 @@ Display strategy menu in
             <a class="nav-link" href="#">Closed positions <SummaryCount count={closedPositions} /></a>
         </li>
     {/if}
+
+	<li class="nav-item">
+		<a class="nav-link" href="#">Deposits and withdraws</a>
+	</li>
 
 	<li class="nav-item">
 		<a class="nav-link" href="#">Strategy source</a>
