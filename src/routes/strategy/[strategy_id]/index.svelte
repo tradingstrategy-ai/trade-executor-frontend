@@ -1,9 +1,9 @@
 <script lang="ts">
 	import StrategyMenu from '$lib/strategy/StrategyMenu.svelte';
-	export let strategyState;
+    import Overview from "$lib/strategy/Overview.svelte";
 </script>
 
-<h1>Hello world</h1>
+<Overview />
 
 <div class="strategy-menu-mobile">
 	<StrategyMenu />

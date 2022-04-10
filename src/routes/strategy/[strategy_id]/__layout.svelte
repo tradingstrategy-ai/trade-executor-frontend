@@ -6,7 +6,7 @@
 
 	import StrategyHeader from '$lib/strategy/StrategyHeader.svelte';
 	import StrategyLoadIndicator from '$lib/strategy/StrategyLoadIndicator.svelte';
-    import StrategyMenu from "$lib/strategy/StrategyMenu.svelte";
+	import StrategyMenu from '$lib/strategy/StrategyMenu.svelte';
 
 	const strategyId = $page.params.strategy_id;
 

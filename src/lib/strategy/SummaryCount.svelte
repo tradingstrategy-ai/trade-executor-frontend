@@ -16,5 +16,5 @@ Loaded:
 </script>
 
 {#if count}
-	<span class="summary-count">({ count })</span>
+	<span class="summary-count">({count})</span>
 {/if}

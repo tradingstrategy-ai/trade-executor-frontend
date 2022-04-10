@@ -8,7 +8,7 @@ Render strategy load indication message when navigating in strategy pages
 Also renders any load error.
 -->
 <script lang="ts">
-    import Spinner from 'svelte-spinner';
+	import Spinner from 'svelte-spinner';
 
 	import { currentStrategy } from './store';
 
@@ -22,6 +22,6 @@ Also renders any load error.
 			Strategy load failed: {{ error }}
 		</div>
 	{:else if !state}
-		<div class="alert alert-info"><Spinner /> Loading strategy data </div>
+		<div class="alert alert-info"><Spinner /> Loading strategy data</div>
 	{/if}
 </div>
