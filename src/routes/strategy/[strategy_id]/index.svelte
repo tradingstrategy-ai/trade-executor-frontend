@@ -1,6 +1,6 @@
 <script lang="ts">
 	import StrategyMenu from '$lib/strategy/StrategyMenu.svelte';
-    import Overview from "$lib/strategy/Overview.svelte";
+	import Overview from '../../../lib/strategy/AssetOverview.svelte';
 </script>
 
 <Overview />

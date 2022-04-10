@@ -222,6 +222,29 @@ export function formatUnixTimestampAsDate(ts: number): string {
 	return d.toDateString();
 }
 
+
+/**
+ * Format UNIX timestamp as hours:minutes
+ * @param ts Timestamp in seconds
+ */
+export function formatUnixTimestampAsHours(ts: number): string {
+	if (!ts) {
+		return '---';
+	}
+
+	const d = new Date(ts * 1000);
+    const options = {
+        weekday: "short",
+        year: "numeric",
+        month: "2-digit",
+        day: "numeric"}
+    //         weekday: "short",
+    //         year: "numeric",
+    //         month: "2-digit",
+    //         day: "numeric"
+	return d.toISOString().split('T')[0]
+}
+
 /**
  * Grabs only the domain part from the URL
  */

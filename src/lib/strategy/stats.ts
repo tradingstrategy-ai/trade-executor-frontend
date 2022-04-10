@@ -8,15 +8,13 @@
 
 import type { State } from './store';
 
-
 /**
  * Get the latest portfolio statistics.
  *
  */
 export function getPortfolioLatestStats(state?: State): object {
-    if(state) {
-        console.log("state is", state);
-        return state.stats.portfolio.at(-1);
-    }
-    return null;
+	if (state) {
+		return state.stats.portfolio.at(-1);
+	}
+	return null;
 }
