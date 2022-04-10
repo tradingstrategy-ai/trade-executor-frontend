@@ -1,9 +1,11 @@
 <script lang="ts">
 	import StrategyMenu from '$lib/strategy/StrategyMenu.svelte';
-	import Overview from '../../../lib/strategy/AssetOverview.svelte';
+	import AssetOverview from '$lib/strategy/AssetOverview.svelte';
+    import PerformanceOverview from '$lib/strategy/PerformanceOverview.svelte';
 </script>
 
-<Overview />
+<AssetOverview />
+<PerformanceOverview />
 
 <div class="strategy-menu-mobile">
 	<StrategyMenu />

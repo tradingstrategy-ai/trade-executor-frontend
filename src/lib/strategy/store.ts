@@ -94,7 +94,7 @@ export async function loadStrategyState(id: string, name: string, webhookUrl: st
 		error: null
 	});
 
-	console.log('Loaded strategy', id);
+	console.log('Loaded strategy state', id, state);
 }
 
 /**

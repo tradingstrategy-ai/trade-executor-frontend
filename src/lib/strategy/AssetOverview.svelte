@@ -16,12 +16,12 @@ Display strategy execution overview information as Bootstrap 4 card..
 {#if portfolioStats}
 	<div class="overview-details">
 		<div class="card">
-			<div class="card-header">Assets</div>
+			<div class="card-header">Asset holding overview</div>
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">Total equity: {formatDollar(portfolioStats.total_equity)}</li>
-                <li class="list-group-item">Cash: {formatDollar(portfolioStats.total_equity)}</li>
+                <li class="list-group-item">Cash: {formatDollar(portfolioStats.free_cash)}</li>
 				<li class="list-group-item">
-					Updated: <TimeAgo time={portfolioStats.calculated_at} />
+					Portfolio last valued at: <TimeAgo time={portfolioStats.calculated_at} />
 				</li>
 			</ul>
 		</div>
