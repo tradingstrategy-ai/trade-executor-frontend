@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { portfolio, stats } from '$lib/state/store';
-	import PositionList from '../../../../lib/strategy/PositionList.svelte';
+	import PositionList from '$lib/strategy/PositionList.svelte';
 
 	$: closedPositions = $portfolio?.closed_positions;
 </script>
