@@ -19,7 +19,7 @@ Also renders any load error.
 <div class="strategy=load-indicator">
 	{#if error}
 		<div class="alert alert-danger">
-			Strategy load failed: {{ error }}
+			Strategy data load failed: {error}. See Web Developer Console for details.
 		</div>
 	{:else if !state}
 		<div class="alert alert-info"><Spinner /> Loading strategy data</div>

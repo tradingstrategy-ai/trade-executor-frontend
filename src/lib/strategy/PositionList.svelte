@@ -98,7 +98,7 @@ Usage:
 	>
 		<thead>
 			<tr>
-				<th data-key="position_id" class="th-positions sortable"># <span /></th>
+				<th data-key="position_id" class="th-positions sortable">Id <span /></th>
 				<th data-key="ticker" class="th-positions sortable">Pair <span /></th>
 				<th data-key="profitability" class="th-positions sortable">Profit <span /></th>
 				<th data-key="size" class="th-positions sortable">Size <span /></th>
@@ -108,9 +108,9 @@ Usage:
 				{/if}
 
 				{#if activeColumns.closed_at}
-					<th data-key="last_trade_at" class="th-positions col-closed-at sortable"
-						>Closed <span /></th
-					>
+					<th data-key="last_trade_at" class="th-positions col-closed-at sortable">
+						Closed <span />
+					</th>
 				{/if}
 
 				<th />
@@ -129,8 +129,8 @@ Usage:
 							{formatProfitability(row.profitability)}
 						</td>
 
-						<td>g
-							{formatDollar(row.equity)}
+						<td>
+							{formatDollar(row.value)}
 						</td>
 
 						{#if activeColumns.opened_at}

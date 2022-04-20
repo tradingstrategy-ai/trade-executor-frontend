@@ -9,13 +9,17 @@ import type { CurrentStrategyInfo } from '../state/store';
 interface StrategyNavigationInfo {
 	strategyName: string;
 	baseUrl: string;
+    pageUrl?: string;
 	pageName: string;
+    segments: string[];
 }
 
 // Map the page slug to longer name.
 // Map by the last path segment of URL
 const pageNames = {
-	'open-positions': 'Open positions'
+	'open-positions': 'Open positions',
+	'closed-positions': 'Closed positions',
+	'frozen-positions': 'Frozen positions'
 };
 
 /**
@@ -30,12 +34,22 @@ export function parseStrategyPath(
 ): StrategyNavigationInfo {
 	assert(currentStrategy, 'currentStrategy is null');
 
-	const pageSegment = page.routeId.split('/').at(-1);
+    const segments = page.routeId.split('/');
+	const pageSegment = segments.at(2);
 	const pageName = pageNames[pageSegment];
 	const baseUrl = `/strategy/${currentStrategy.id}`;
+
+    let pageUrl;
+    if(pageSegment) {
+        pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
+    } else {
+        pageUrl = `/strategy/${currentStrategy.id}`;
+    }
 	return {
 		strategyName: currentStrategy.name,
 		baseUrl,
-		pageName
+        pageUrl,
+		pageName,
+        segments,
 	};
 }

@@ -33,22 +33,26 @@ Display strategy execution overview information as Bootstrap 4 card..
 			</ul>
 
 			<ul class="list-group list-group-flush">
-				<span class={determineProfitColourClass(portfolioStats.unrealised_profit_usd)}>
-					<li class="list-group-item">
-						Unrealised profit: {formatDollar(portfolioStats.unrealised_profit_usd)}
-					</li>
-				</span>
+				<li class="list-group-item">
+					Unrealised profit:
+					<span class={determineProfitColourClass(portfolioStats.unrealised_profit_usd)}>
+						{formatDollar(portfolioStats.unrealised_profit_usd)}
+					</span>
+				</li>
 			</ul>
 
 			<ul class="list-group list-group-flush">
-				<span class={determineProfitColourClass(portfolioStats.realised_profit_usd)}>
+				<span>
 					<li class="list-group-item">
-						Realised profit: {formatDollar(portfolioStats.realised_profit_usd)}
+						Realised profit:
+						<span class={determineProfitColourClass(portfolioStats.realised_profit_usd)}>
+							{formatDollar(portfolioStats.realised_profit_usd)}
+						</span>
 					</li>
 				</span>
 			</ul>
 		</div>
 	</div>
 {:else}
-	<p>Stats not available.</p>
+	<!-- <p>Stats not available.</p> -->
 {/if}

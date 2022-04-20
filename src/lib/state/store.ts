@@ -80,23 +80,36 @@ export async function loadStrategyState(id: string, name: string, webhookUrl: st
 	currentStrategy.set({ id, name, state: null, error: null });
 
 	// Load the state file from the server;
-	const resp = await fetch(url);
-	if (!resp.ok) {
-		console.error('Failed to load', url, resp.status);
-		currentStrategy.set({ id, name, state: null, error: resp.statusText });
+	try {
+		const resp = await fetch(url);
+
+		if (!resp.ok) {
+			console.error('Failed to load', url, resp.status);
+			currentStrategy.set({ id, name, state: null, error: resp.statusText });
+			return;
+		}
+
+		const state = await resp.json();
+
+		// Hurray, our server managed to spit out a non-crashing reply
+		currentStrategy.set({
+			id,
+			name,
+			state,
+			error: null
+		});
+
+		console.log('Loaded strategy state', id, state);
+	} catch (e) {
+		console.log('Problem handling state load');
+		console.error(e);
+		currentStrategy.set({
+			id,
+			name,
+			state: null,
+			error: e.toString()
+		});
 	}
-
-	const state = await resp.json();
-
-	// Hurray, our server managed to spit out a non-crashing reply
-	currentStrategy.set({
-		id,
-		name,
-		state,
-		error: null
-	});
-
-	console.log('Loaded strategy state', id, state);
 }
 
 /**

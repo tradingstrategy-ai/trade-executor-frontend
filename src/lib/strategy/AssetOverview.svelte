@@ -27,5 +27,5 @@ Display strategy execution overview information as Bootstrap 4 card..
 		</div>
 	</div>
 {:else}
-	<p>Stats not available.</p>
+	<!-- <p>Stats not available.</p> -->
 {/if}
