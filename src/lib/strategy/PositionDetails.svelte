@@ -21,7 +21,7 @@ Usage:
 	import { parseStrategyPath } from '../strategy/path';
 	import { currentStrategy, portfolio, stats } from '../state/store';
 	import { PositionKind } from '../state/interface';
-	import { formatUnixTimestampAsHours, formatDuration, formatProfitability, formatDollar } from '../helpers/formatters';
+	import { formatUnixTimestampAsHours, formatDuration, formatProfitability, formatDollar, formatAmount } from '../helpers/formatters';
     import {getPositionLatestStats} from "../state/stats";
 
 	export let positionKind: PositionKind;
@@ -55,6 +55,16 @@ Usage:
 	<h2>Overview</h2>
 
 	<table class="table">
+
+		<tr>
+			<th>Pair</th>
+			<td>
+                <a href={position.pair.info_url}>
+                    {position.pair.base.token_symbol} - {position.pair.quote.token_symbol}
+                </a>
+            </td>
+		</tr>
+
 		<tr>
 			<th>Opened</th>
 			<td>{formatUnixTimestampAsHours(position.opened_at)}</td>
@@ -100,6 +110,20 @@ Usage:
                     {formatDollar(positionStats.value)}
                 </td>
             </tr>
+
+            <tr>
+                <th>Units</th>
+                <td>
+                    {formatAmount(positionStats.equity)} {position.pair.base.token_symbol}
+                </td>
+            </tr>
         {/if}
+
+       <tr>
+            <th>Last revaluation</th>
+            <td>
+                {formatUnixTimestampAsHours(position.last_pricing_at)}
+            </td>
+        </tr>
 	</table>
 {/if}
