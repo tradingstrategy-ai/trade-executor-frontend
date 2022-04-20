@@ -1,7 +1,7 @@
 <script lang="ts">
-	import StrategyMenu from '$lib/strategy/StrategyMenu.svelte';
-	import AssetOverview from '$lib/strategy/AssetOverview.svelte';
-	import PerformanceOverview from '$lib/strategy/PerformanceOverview.svelte';
+	import StrategyMenu from 'trade-executor-frontend/strategy/StrategyMenu.svelte';
+	import AssetOverview from 'trade-executor-frontend/strategy/AssetOverview.svelte';
+	import PerformanceOverview from 'trade-executor-frontend/strategy/PerformanceOverview.svelte';
 </script>
 
 <div class="overview-card-wrapper">

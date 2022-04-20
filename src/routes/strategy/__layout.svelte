@@ -1,5 +1,5 @@
 <script>
-	import Breadcrumb from '$lib/header/Breadcrumb.svelte';
+	import Breadcrumb from 'trade-executor-frontend/header/Breadcrumb.svelte';
 </script>
 
 <div class="container">

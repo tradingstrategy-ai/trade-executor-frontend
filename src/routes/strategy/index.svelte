@@ -1,5 +1,5 @@
 <script context="module">
-	import { getConfiguredStrategies } from '$lib/strategy/configuration';
+	import { getConfiguredStrategies } from 'trade-executor-frontend/strategy/configuration';
 
 	export async function load() {
 		let strategies = getConfiguredStrategies();

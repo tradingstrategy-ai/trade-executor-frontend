@@ -4,9 +4,9 @@
 
 	import { loadStrategyById } from '../../../lib/state/store';
 
-	import StrategyHeader from '$lib/strategy/StrategyHeader.svelte';
-	import StrategyLoadIndicator from '$lib/strategy/StrategyLoadIndicator.svelte';
-	import StrategyMenu from '$lib/strategy/StrategyMenu.svelte';
+	import StrategyHeader from 'trade-executor-frontend/strategy/StrategyHeader.svelte';
+	import StrategyLoadIndicator from 'trade-executor-frontend/strategy/StrategyLoadIndicator.svelte';
+	import StrategyMenu from 'trade-executor-frontend/strategy/StrategyMenu.svelte';
 
 	const strategyId = $page.params.strategy_id;
 
