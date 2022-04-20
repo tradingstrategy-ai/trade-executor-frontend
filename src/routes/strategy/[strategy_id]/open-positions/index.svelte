@@ -8,5 +8,6 @@
 <PositionList
 	positions={openPositions}
 	stats={$stats}
+	columns={{ opened_at: true }}
 	settings={{ blocks: { searchInput: false, paginationButtons: false, paginationRowCount: false } }}
 />

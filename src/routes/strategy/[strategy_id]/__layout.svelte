@@ -24,8 +24,10 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-3">
-			<StrategyMenu />
+		<div class="col-md-3 col-strategy-menu">
+			<div class="strategy-menu-sidebar">
+				<StrategyMenu />
+			</div>
 		</div>
 		<div class="col-md-9">
 			<StrategyLoadIndicator />
@@ -33,3 +35,11 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	@media (max-width: 992px) {
+		.col-strategy-menu {
+			display: none;
+		}
+	}
+</style>

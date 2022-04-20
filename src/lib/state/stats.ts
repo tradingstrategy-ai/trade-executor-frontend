@@ -56,8 +56,9 @@ export function createCombinedPositionList(positions: TradingPosition[], stats: 
 
 	for (let position of positions) {
 		const positionStats = getPositionLatestStats(position.position_id, stats) || {};
-		const merged = { ...position, ...positionStats };
-        merged.ticker = `${position.pair.base.token_symbol}-${position.pair.quote.token_symbol}`;
+		const finalStats = stats.closed_positions[position.position_id] || {};
+		const merged = { ...position, ...positionStats, ...finalStats };
+		merged.ticker = `${position.pair.base.token_symbol}-${position.pair.quote.token_symbol}`;
 		rows.push(merged);
 	}
 	return rows;

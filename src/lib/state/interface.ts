@@ -32,7 +32,8 @@ export interface TradingPosition {
  */
 export interface Stats {
 	portfolio: any;
-	positions: any[];
+	positions: Record<number, any[]>;
+	closed_positions: Record<number, any>;
 }
 
 /**

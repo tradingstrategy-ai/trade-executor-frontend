@@ -47,7 +47,7 @@ Display strategy menu in
 
 	{#if closedPositions > 0}
 		<li class="nav-item">
-			<a class="nav-link" href="{baseUrl}/closed  -positions"
+			<a class="nav-link" href="{baseUrl}/closed-positions"
 				>Closed positions <SummaryCount count={closedPositions} /></a
 			>
 		</li>
