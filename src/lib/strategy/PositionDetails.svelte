@@ -23,6 +23,7 @@ Usage:
 	import { PositionKind } from '../state/interface';
 	import { formatUnixTimestampAsHours, formatDuration, formatProfitability, formatDollar, formatAmount } from '../helpers/formatters';
     import {getPositionLatestStats} from "../state/stats";
+    import TradeList from "./TradeList.svelte";
 
 	export let positionKind: PositionKind;
 
@@ -126,4 +127,10 @@ Usage:
             </td>
         </tr>
 	</table>
+
+    <h2>Trades</h2>
+
+    <TradeList trades={position.trades} position={position} />
 {/if}
+
+

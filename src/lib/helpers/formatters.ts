@@ -1,3 +1,9 @@
+/**
+ * Number and time formatting helpers.
+ */
+
+import assert from 'assert-ts';
+
 export function formatKilos(n): string {
 	if (n <= 1000) {
 		return (n / 1000).toLocaleString('en', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
@@ -146,6 +152,97 @@ export function formatDollar(n: number, minFrag = 2, maxFrag = 2, prefix = '$'):
 	}
 }
 
+
+/**
+ * Format extreme large or small amounts human friendly manner.
+ *
+ * Useful to display token amounts.
+ *
+ * @param n
+ * @param minFrag
+ * @param maxFrag
+ */
+export function formatTokenAmount(x: number, minFrag = 2, maxFrag = 2, prefix = ''): string {
+
+    assert(typeof x == "number", `Was not a number: ${x}`);
+
+    // Consider negative quantities
+    const n = Math.abs(x);
+
+    if (n === undefined || n === null) {
+		// Plz avoid ending here
+		return '---';
+	}
+
+	if (n === 0) {
+		return `${prefix}0`;
+	}
+
+	if (n < 0.000001) {
+		return (
+			prefix +
+			x.toLocaleString('en', {
+				minimumFractionDigits: 10,
+				maximumFractionDigits: 10
+			})
+		);
+	} else if (n < 0.0001) {
+		return (
+			prefix +
+			x.toLocaleString('en', {
+				minimumFractionDigits: 7,
+				maximumFractionDigits: 7
+			})
+		);
+	} else if (n < 1) {
+		// Format funny tokens
+		const res = (
+			prefix +
+			x.toLocaleString('en', {
+				maximumFractionDigits: 5
+			})
+		);
+        return res;
+	}
+
+	if (n >= 1000 * 1000 * 1000) {
+		return (
+			prefix +
+			(x / (1000 * 1000 * 1000)).toLocaleString('en', {
+				minimumFractionDigits: minFrag,
+				maximumFractionDigits: maxFrag
+			}) +
+			'B'
+		);
+	} else if (n >= 1000 * 1000) {
+		return (
+			prefix +
+			(x / (1000 * 1000)).toLocaleString('en', {
+				minimumFractionDigits: minFrag,
+				maximumFractionDigits: maxFrag
+			}) +
+			'M'
+		);
+	} else if (n >= 1000) {
+		return (
+			prefix +
+			(x / 1000).toLocaleString('en', {
+				minimumFractionDigits: minFrag,
+				maximumFractionDigits: maxFrag
+			}) +
+			'k'
+		);
+	} else {
+		return (
+			prefix +
+			x.toLocaleString('en', {
+				minimumFractionDigits: minFrag,
+				maximumFractionDigits: maxFrag
+			})
+		);
+	}
+}
+
 export function formatPriceChange(n: number): string {
 	return (
 		(n > 0 ? '▲' : '▼') +
@@ -226,7 +323,7 @@ export function formatUnixTimestampAsDate(ts: number): string {
  * Format UNIX timestamp as hours:minutes
  * @param ts Timestamp in seconds
  */
-export function formatUnixTimestampAsHours(ts: number): string {
+export function formatUnixTimestampAsHours(ts: number, newlined=false): string {
 	if (!ts) {
 		return '---';
 	}
@@ -236,7 +333,12 @@ export function formatUnixTimestampAsHours(ts: number): string {
 	const month = d.toLocaleDateString('en-us', { month: '2-digit' });
 	const year = d.toLocaleDateString('en-us', { year: 'numeric' });
 	const time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false });
-	return `${year}-${month}-${day} ${time}`;
+
+    if(newlined) {
+        return `${year}-${month}<br>${day} ${time}`;
+    } else {
+        return `${year}-${month}-${day} ${time}`;
+    }
 }
 
 /**

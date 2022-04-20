@@ -21,7 +21,6 @@ Based on Grid.js and svelte-simple-datatables:
 - https://svelte.dev/repl/e772220feac54e65b132615ac4d8eb09?version=3.47.0
 - https://gridjs.io/docs/config/columns
 
-Unfortunately there can be only one svelte-simple-datatables per page.
 -->
 <script lang="ts">
 	import Grid from 'gridjs-svelte';
