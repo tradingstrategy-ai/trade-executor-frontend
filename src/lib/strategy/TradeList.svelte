@@ -54,20 +54,17 @@ Based on Grid.js and svelte-simple-datatables:
 
 	const gridJsColums = [
 		{
-			id: 'warning',
-			name: '',
-			sort: {
-				enabled: false
-			},
-			formatter: (cell, row) => {
-				return cell ? '⚠️' : '';
-			}
-		},
-		{
-			id: 'trade_id',
+			id: 'id_and_warning',
 			name: 'Id',
 			sort: {
 				enabled: true
+			},
+			formatter: (cell, row) => {
+                if(cell.warning) {
+                    return html(`<span class=warning>${cell.id}</span>`);
+                } else {
+                    return cell.id;
+                }
 			}
 		},
 		{
@@ -101,7 +98,7 @@ Based on Grid.js and svelte-simple-datatables:
 			}
 		},
 		{
-			id: 'executed_quantity',
+			id: 'quantity',
 			name: `Quantity (${position.pair.base.token_symbol})`,
 			sort: {
 				enabled: true
@@ -130,9 +127,10 @@ Based on Grid.js and svelte-simple-datatables:
         for(let t of Object.values(trades)) {
             let o = {...t}
             // Decimal string -> float conversion
-            o.executed_quantity = parseFloat(o.executed_quantity);
+            o.quantity = o.executed_quantity ? parseFloat(o.executed_quantity) : parseFloat(o.planned_quantity);
+            o.value = o.executed_reserve ? parseFloat(o.executed_reserve) : parseFloat(o.planned_reserve);
             // If we did not execute the trade set the warning flag
-            o.warning = !o.executed_at;
+            o.id_and_warning = { id: o.trade_id, warning: !o.executed_at };
             result.push(o);
         }
         return result;
@@ -155,4 +153,11 @@ Based on Grid.js and svelte-simple-datatables:
 	:global(.table-trades.gridjs-table) {
 		font-size: 80%;
 	}
+
+	:global(.table-trades.gridjs-table .warning):before {
+        content: '⚠️ ';
+        color: red;
+		font-size: 150%;
+	}
+
 </style>

@@ -4,8 +4,13 @@
 	import PerformanceOverview from '$lib/strategy/PerformanceOverview.svelte';
 </script>
 
-<AssetOverview />
-<PerformanceOverview />
+<div class="overview-card-wrapper">
+    <AssetOverview />
+</div>
+
+<div class="overview-card-wrapper">
+    <PerformanceOverview />
+</div>
 
 <div class="strategy-menu-mobile">
 	<StrategyMenu />
@@ -21,4 +26,8 @@
 			display: block;
 		}
 	}
+
+    .overview-card-wrapper {
+        margin-bottom: 20px;
+    }
 </style>
