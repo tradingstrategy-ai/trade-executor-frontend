@@ -1,6 +1,10 @@
+/**
+ * Navigation mapping and breadcrumbs..
+ */
+
 import assert from 'assert-ts';
 import type { Page } from '@sveltejs/kit';
-import type { CurrentStrategyInfo } from './store';
+import type { CurrentStrategyInfo } from '../state/store';
 
 interface StrategyNavigationInfo {
 	strategyName: string;
@@ -27,7 +31,7 @@ export function parseStrategyPath(
 	assert(currentStrategy, 'currentStrategy is null');
 
 	const pageSegment = page.routeId.split('/').at(-1);
-	const pageName = pageNames[pageSegment] || 'Overview';
+	const pageName = pageNames[pageSegment];
 	const baseUrl = `/strategy/${currentStrategy.id}`;
 	return {
 		strategyName: currentStrategy.name,

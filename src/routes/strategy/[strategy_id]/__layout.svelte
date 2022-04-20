@@ -2,7 +2,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
-	import { loadStrategyById } from '$lib/strategy/store';
+	import { loadStrategyById } from '../../../lib/state/store';
 
 	import StrategyHeader from '$lib/strategy/StrategyHeader.svelte';
 	import StrategyLoadIndicator from '$lib/strategy/StrategyLoadIndicator.svelte';

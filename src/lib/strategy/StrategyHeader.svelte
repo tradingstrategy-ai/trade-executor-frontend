@@ -5,7 +5,7 @@ Display strategy title or id while loading in the strategy layout.
 -->
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { currentStrategy } from './store.ts';
+	import { currentStrategy } from '../state/store.ts';
 	import { parseStrategyPath } from './path';
 
 	const strategyId = $page.params.strategy_id;
@@ -15,7 +15,7 @@ Display strategy title or id while loading in the strategy layout.
 
 <h1>
 	{#if strategyNavigationInfo.pageName}
-		{strategyNavigationInfo.pageName} - {strategyNavigationInfo.strategyName}
+		{strategyNavigationInfo.pageName}
 	{:else}
 		{strategyNavigationInfo.strategyName}
 	{/if}

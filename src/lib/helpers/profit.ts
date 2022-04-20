@@ -6,13 +6,13 @@
  * @param profit Price change as percents
  */
 export function determineProfitColourClass(profit: number): string {
-    if(!profit) {
-        return "proft-black"; // Data not loaded
-    }
+	if (!profit) {
+		return 'proft-black'; // Data not loaded
+	}
 
-    if(profit > 0) {
-        return "profit-green";
-    } else {
-        return "profit-red";
-    }
+	if (profit > 0) {
+		return 'profit-green';
+	} else {
+		return 'profit-red';
+	}
 }

@@ -10,7 +10,7 @@ Also renders any load error.
 <script lang="ts">
 	import Spinner from 'svelte-spinner';
 
-	import { currentStrategy } from './store';
+	import { currentStrategy } from '../state/store';
 
 	$: error = $currentStrategy.error;
 	$: state = $currentStrategy.state;

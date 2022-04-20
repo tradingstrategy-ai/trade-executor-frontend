@@ -1,17 +1,7 @@
 import { derived, writable } from 'svelte/store';
-import { getConfiguredStrategyById } from './configuration';
-
-/**
- * Strategy execution state as exported from Python.
- *
- * For structure details see: https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/state.py#L25
- *
- *
- */
-export interface State {
-	portfolio: any;
-	stats: any;
-}
+import type { Readable } from 'svelte/store';
+import { getConfiguredStrategyById } from '../strategy/configuration';
+import type { Portfolio, State, Stats } from './interface';
 
 /**
  * Describe loaded strategy
@@ -37,10 +27,22 @@ export const currentStrategy = writable({
 	error: null
 });
 
-/** One state can contain only one portflio ATM. Alias it for simplify codingt. */
-export const portfolio = derived(
+/**
+ * Current portfolio alias it for simplify coding.
+ * One state can contain only one portfolio ATM.
+ */
+export const portfolio: Readable<Portfolio> = derived(
 	currentStrategy,
 	($currentStrategy) => $currentStrategy?.state?.portfolio
+);
+
+/**
+ * Current portfolio statistics alias it for simplify coding.
+ * One state can contain only one portfolio ATM.
+ */
+export const stats: Readable<Stats> = derived(
+	currentStrategy,
+	($currentStrategy) => $currentStrategy?.state?.stats
 );
 
 /** The current strategy id shortcut - can be used in links, etc. */

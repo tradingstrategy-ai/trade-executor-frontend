@@ -222,7 +222,6 @@ export function formatUnixTimestampAsDate(ts: number): string {
 	return d.toDateString();
 }
 
-
 /**
  * Format UNIX timestamp as hours:minutes
  * @param ts Timestamp in seconds
@@ -233,16 +232,17 @@ export function formatUnixTimestampAsHours(ts: number): string {
 	}
 
 	const d = new Date(ts * 1000);
-    const options = {
-        weekday: "short",
-        year: "numeric",
-        month: "2-digit",
-        day: "numeric"}
-    //         weekday: "short",
-    //         year: "numeric",
-    //         month: "2-digit",
-    //         day: "numeric"
-	return d.toISOString().split('T')[0]
+	const options = {
+		weekday: 'short',
+		year: 'numeric',
+		month: '2-digit',
+		day: 'numeric'
+	};
+	//         weekday: "short",
+	//         year: "numeric",
+	//         month: "2-digit",
+	//         day: "numeric"
+	return d.toISOString().split('T')[0];
 }
 
 /**
@@ -273,4 +273,19 @@ export function formatUSDCBalance(web3, b: string, decimals: number): string {
 	const n = parseFloat(b);
 	const val = n / Math.pow(10, decimals);
 	return val.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+/**
+ * Format how much profit a position has made.
+ * @param n
+ */
+export function formatProfitability(n: number): string {
+	return (
+		(n > 0 ? '▲' : '▼') +
+		(Math.abs(n) * 100).toLocaleString('en', {
+			minimumFractionDigits: 1,
+			maximumFractionDigits: 1
+		}) +
+		'%'
+	);
 }

@@ -4,8 +4,8 @@
 Display time ago widget.
 -->
 <script lang="ts">
-    import assert from "assert-ts";
-    import {formatUnixTimestampAsHours} from "$lib/helpers/formatters";
+	import assert from 'assert-ts';
+	import { formatUnixTimestampAsHours } from '$lib/helpers/formatters';
 
 	export let time;
 	export let mode = 'minutes';
@@ -18,7 +18,7 @@ Display time ago widget.
 	 * @param input: Timestamp as UNIX seconds
 	 */
 	function formatTimeAgo(input: number) {
-        assert(input, "input number missing")
+		assert(input, 'input number missing');
 		const date = input instanceof Date ? input : new Date(input * 1000);
 
 		const formatter = new Intl.RelativeTimeFormat('en');

@@ -7,7 +7,7 @@ Display strategy menu in
 
 -->
 <script lang="ts">
-	import { currentStrategy, portfolio } from './store';
+	import { currentStrategy, portfolio } from '../state/store';
 	import SummaryCount from './SummaryCount.svelte';
 	import { parseStrategyPath } from './path';
 	import { page } from '$app/stores';
@@ -32,22 +32,24 @@ Display strategy menu in
 	</li>
 
 	<li class="nav-item">
-		<a class="nav-link" href="{baseUrl}/open-positions"
-			>Open positions <SummaryCount count={openPositions} /></a
-		>
+		<a class="nav-link" href="{baseUrl}/open-positions">
+			Open positions <SummaryCount count={openPositions} />
+		</a>
 	</li>
 
 	{#if frozenPositions > 0}
 		<li class="nav-item">
-			<a class="nav-link" href="{baseUrl}/frozen-positions"
-				>Frozen positions <SummaryCount count={frozenPositions} /></a
-			>
+			<a class="nav-link" href="{baseUrl}/frozen-positions">
+				Frozen positions <SummaryCount count={frozenPositions} />
+			</a>
 		</li>
 	{/if}
 
 	{#if closedPositions > 0}
 		<li class="nav-item">
-			<a class="nav-link" href="#">Closed positions <SummaryCount count={closedPositions} /></a>
+			<a class="nav-link" href="{baseUrl}/closed  -positions"
+				>Closed positions <SummaryCount count={closedPositions} /></a
+			>
 		</li>
 	{/if}
 
