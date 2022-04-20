@@ -231,12 +231,12 @@ export function formatUnixTimestampAsHours(ts: number): string {
 		return '---';
 	}
 
-    const d = new Date(ts * 1000);
-    const day = d.toLocaleDateString('en-us',{day: '2-digit'} )
-    const month = d.toLocaleDateString('en-us',{month: '2-digit'})
-    const year = d.toLocaleDateString('en-us',{year: 'numeric'})
-    const time = d.toLocaleTimeString('en-us',{hour: '2-digit', minute: '2-digit', hour12: false})
-    return `${year}-${month}-${day} ${time}`;
+	const d = new Date(ts * 1000);
+	const day = d.toLocaleDateString('en-us', { day: '2-digit' });
+	const month = d.toLocaleDateString('en-us', { month: '2-digit' });
+	const year = d.toLocaleDateString('en-us', { year: 'numeric' });
+	const time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false });
+	return `${year}-${month}-${day} ${time}`;
 }
 
 /**
@@ -282,4 +282,24 @@ export function formatProfitability(n: number): string {
 		}) +
 		'%'
 	);
+}
+
+/**
+ * Formats the time duration string as
+ *
+ * @param seconds
+ */
+export function formatDuration(seconds): string {
+	const total = seconds * 1000;
+
+	//const seconds = Math.floor((total / 1000) % 60);
+	const minutes = Math.floor((total / 1000 / 60) % 60);
+	const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+	const days = Math.floor(total / (1000 * 60 * 60 * 24));
+
+	if (days > 0) {
+		return `${days} days ${hours}h ${minutes}m`;
+	} else {
+		return `${hours}h ${minutes}m`;
+	}
 }

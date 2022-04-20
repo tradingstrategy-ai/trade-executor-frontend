@@ -8,6 +8,15 @@
  */
 
 /**
+ * Used to differetiate different position types in UI logic
+ */
+export enum PositionKind {
+	open,
+	closed,
+	frozen
+}
+
+/**
  *
  * https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/trade.py
  */

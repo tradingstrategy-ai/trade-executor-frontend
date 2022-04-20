@@ -27,6 +27,7 @@ Unfortunately there can be only one svelte-simple-datatables per page.
 	import Grid from 'gridjs-svelte';
 	import { html } from 'gridjs';
 	import 'gridjs/dist/theme/mermaid.css';
+
 	import type { Stats, TradingPosition } from '../state/interface';
 	import { createCombinedPositionList } from '../state/stats';
 	import {
@@ -34,6 +35,11 @@ Unfortunately there can be only one svelte-simple-datatables per page.
 		formatProfitability,
 		formatDollar
 	} from '../helpers/formatters';
+	import { page } from '$app/stores';
+	import { parseStrategyPath } from '../strategy/path';
+	import { currentStrategy } from '../state/store';
+	import type { CurrentStrategyInfo } from '../state/store';
+	import type { Page } from '@sveltejs/kit';
 
 	/**
 	 * Position raw data as id -> TradingPosition mapping.
@@ -74,6 +80,13 @@ Unfortunately there can be only one svelte-simple-datatables per page.
 		const positionList = Object.values(_positions);
 		const combined = createCombinedPositionList(positionList, _stats);
 		return combined;
+	}
+
+	let pageUrl;
+
+	$: {
+		const navInfo = parseStrategyPath($currentStrategy, $page);
+		pageUrl = navInfo.pageUrl;
 	}
 
 	const gridJsColums = [
@@ -134,8 +147,8 @@ Unfortunately there can be only one svelte-simple-datatables per page.
 			name: 'Closed',
 			formatter: (cell) => {
 				const d = formatUnixTimestampAsHours(cell);
-                console.log(d);
-                return d;
+				console.log(d);
+				return d;
 			},
 			sort: {
 				enabled: true
@@ -143,14 +156,16 @@ Unfortunately there can be only one svelte-simple-datatables per page.
 		});
 	}
 
+	// Generate link to the position details page
 	gridJsColums.push({
 		id: 'details',
 		sort: {
 			enabled: false
 		},
 		name: '',
-		formatter: (cell) => {
-			return html("<a href=''>Details</a>");
+		formatter: (cell, row) => {
+			const positionId = row.cells[0].data;
+			return html(`<a href="${pageUrl}/${positionId}">Details</a>`);
 		}
 	});
 

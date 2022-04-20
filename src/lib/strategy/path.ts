@@ -12,6 +12,7 @@ interface StrategyNavigationInfo {
 	pageUrl?: string;
 	pageName: string;
 	segments: string[];
+	positionId?: string;
 }
 
 // Map the page slug to longer name.
@@ -36,11 +37,14 @@ export function parseStrategyPath(
 
 	const segments = page.routeId.split('/');
 	const pageSegment = segments.at(2);
+	const positionId = page.params.position_id;
 	const pageName = pageNames[pageSegment];
 	const baseUrl = `/strategy/${currentStrategy.id}`;
 
 	let pageUrl;
-	if (pageSegment) {
+	if (positionId) {
+		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}/${positionId}`;
+	} else if (pageSegment) {
 		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
 	} else {
 		pageUrl = `/strategy/${currentStrategy.id}`;
@@ -50,6 +54,7 @@ export function parseStrategyPath(
 		baseUrl,
 		pageUrl,
 		pageName,
-		segments
+		segments,
+		positionId
 	};
 }
