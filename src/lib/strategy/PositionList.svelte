@@ -133,7 +133,9 @@ Unfortunately there can be only one svelte-simple-datatables per page.
 			id: 'closed_at',
 			name: 'Closed',
 			formatter: (cell) => {
-				return formatUnixTimestampAsHours(cell);
+				const d = formatUnixTimestampAsHours(cell);
+                console.log(d);
+                return d;
 			},
 			sort: {
 				enabled: true

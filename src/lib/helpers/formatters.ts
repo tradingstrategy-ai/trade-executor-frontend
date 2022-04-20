@@ -231,18 +231,12 @@ export function formatUnixTimestampAsHours(ts: number): string {
 		return '---';
 	}
 
-	const d = new Date(ts * 1000);
-	const options = {
-		weekday: 'short',
-		year: 'numeric',
-		month: '2-digit',
-		day: 'numeric'
-	};
-	//         weekday: "short",
-	//         year: "numeric",
-	//         month: "2-digit",
-	//         day: "numeric"
-	return d.toISOString().split('T')[0];
+    const d = new Date(ts * 1000);
+    const day = d.toLocaleDateString('en-us',{day: '2-digit'} )
+    const month = d.toLocaleDateString('en-us',{month: '2-digit'})
+    const year = d.toLocaleDateString('en-us',{year: 'numeric'})
+    const time = d.toLocaleTimeString('en-us',{hour: '2-digit', minute: '2-digit', hour12: false})
+    return `${year}-${month}-${day} ${time}`;
 }
 
 /**

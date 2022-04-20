@@ -6,7 +6,7 @@
 </script>
 
 <div class="alert alert-info">
-	Frozen positions are traded positions which trade executor could not automatically open or close,
+	Frozen positions could not be automatically open or closed,
 	usually due to a problem with related tokens or blockchains. These positions may need manual
 	intervention.
 </div>
@@ -15,5 +15,5 @@
 	positions={frozenPositions}
 	stats={$stats}
 	columns={{ opened_at: true }}
-	settings={{ blocks: { searchInput: false, paginationButtons: false, paginationRowCount: false } }}
+    pagination={false}
 />
