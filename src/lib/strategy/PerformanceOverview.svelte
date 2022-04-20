@@ -21,7 +21,7 @@ Display strategy execution overview information as Bootstrap 4 card..
 {#if portfolioStats}
 	<div class="overview-details">
 		<div class="card">
-			<div class="card-header">Performance overview</div>
+			<div class="card-header">Performance</div>
 
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">

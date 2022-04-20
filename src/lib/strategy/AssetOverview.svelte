@@ -16,7 +16,7 @@ Display strategy execution overview information as Bootstrap 4 card..
 {#if portfolioStats}
 	<div class="overview-details">
 		<div class="card">
-			<div class="card-header">Asset holding overview</div>
+			<div class="card-header">Current assets</div>
 			<ul class="list-group list-group-flush">
 				<li class="list-group-item">Total equity: {formatDollar(portfolioStats.total_equity)}</li>
 				<li class="list-group-item">Cash: {formatDollar(portfolioStats.free_cash)}</li>
