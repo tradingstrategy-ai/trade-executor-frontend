@@ -23,55 +23,54 @@ Display strategy menu in
 </script>
 
 <div class="card shadow-soft">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href={baseUrl}>Overview</a>
-        </li>
+	<ul class="nav flex-column">
+		<li class="nav-item">
+			<a class="nav-link" href={baseUrl}>Overview</a>
+		</li>
 
-        <li class="nav-item">
-            <a class="nav-link" href={baseUrl}>Performance</a>
-        </li>
+		<li class="nav-item">
+			<a class="nav-link" href={baseUrl}>Performance</a>
+		</li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="{baseUrl}/open-positions">
-                Open positions
-                <SummaryCount count={openPositions}/>
-            </a>
-        </li>
+		<li class="nav-item">
+			<a class="nav-link" href="{baseUrl}/open-positions">
+				Open positions
+				<SummaryCount count={openPositions} />
+			</a>
+		</li>
 
-        {#if frozenPositions > 0}
-            <li class="nav-item">
-                <a class="nav-link" href="{baseUrl}/frozen-positions">
-                    Frozen positions
-                    <SummaryCount count={frozenPositions}/>
-                </a>
-            </li>
-        {/if}
+		{#if frozenPositions > 0}
+			<li class="nav-item">
+				<a class="nav-link" href="{baseUrl}/frozen-positions">
+					Frozen positions
+					<SummaryCount count={frozenPositions} />
+				</a>
+			</li>
+		{/if}
 
-        {#if closedPositions > 0}
-            <li class="nav-item">
-                <a class="nav-link" href="{baseUrl}/closed-positions"
-                >Closed positions
-                    <SummaryCount count={closedPositions}/>
-                </a
-                >
-            </li>
-        {/if}
+		{#if closedPositions > 0}
+			<li class="nav-item">
+				<a class="nav-link" href="{baseUrl}/closed-positions"
+					>Closed positions
+					<SummaryCount count={closedPositions} />
+				</a>
+			</li>
+		{/if}
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">Deposits and withdraws</a>
-        </li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Deposits and withdraws</a>
+		</li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">Strategy source</a>
-        </li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Strategy source</a>
+		</li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">System metrics</a>
-        </li>
+		<li class="nav-item">
+			<a class="nav-link" href="#">System metrics</a>
+		</li>
 
-        <li class="nav-item">
-            <a class="nav-link" href="#">Logs</a>
-        </li>
-    </ul>
+		<li class="nav-item">
+			<a class="nav-link" href="#">Logs</a>
+		</li>
+	</ul>
 </div>

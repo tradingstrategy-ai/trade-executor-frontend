@@ -19,11 +19,6 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-12">
-			<StrategyHeader />
-		</div>
-	</div>
-	<div class="row">
 		<div class="col-md-3 col-strategy-menu">
 			<div class="strategy-menu-sidebar">
 				<StrategyMenu />
@@ -31,6 +26,7 @@
 		</div>
 		<div class="col-md-9">
 			<StrategyLoadIndicator />
+			<StrategyHeader />
 			<slot />
 		</div>
 	</div>

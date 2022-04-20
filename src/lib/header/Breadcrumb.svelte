@@ -16,49 +16,47 @@ Usage:
     <Breadcrumb />
 -->
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { parseStrategyPath } from '../strategy/path';
+	import { currentStrategy } from '../state/store';
+	import type { CurrentStrategyInfo } from '../state/store';
+	import type { Page } from '@sveltejs/kit';
 
-    import {page} from "$app/stores";
-	import {parseStrategyPath} from "../strategy/path";
-    import {currentStrategy } from "../state/store";
-    import type {CurrentStrategyInfo } from "../state/store";
-    import type {Page} from "@sveltejs/kit";
+	// build crumbs info under /strategy route end point
+	function buildCrumbs(currentStrategy: CurrentStrategyInfo, page: Page) {
+		const navInfo = parseStrategyPath(currentStrategy, page);
+		let crumbs = [
+			{
+				url: '/',
+				name: 'Home'
+			},
 
-    // build crumbs info under /strategy route end point
-    function buildCrumbs(currentStrategy: CurrentStrategyInfo, page: Page) {
+			{
+				url: '/strategy',
+				name: 'Strategies'
+			},
 
-        const navInfo = parseStrategyPath(currentStrategy, page);
-        let crumbs = [
-            {
-                url: "/",
-                name: "Home"
-            },
+			{
+				url: navInfo.baseUrl,
+				name: navInfo.strategyName
+			}
+		];
 
-            {
-                url: "/strategy",
-                name: "Strategies"
-            },
+		if (navInfo.pageName) {
+			crumbs.push({
+				url: navInfo.pageUrl,
+				name: navInfo.pageName
+			});
+		}
 
-            {
-                url: navInfo.baseUrl,
-                name: navInfo.strategyName,
-            },
-        ];
+		for (let c of crumbs.slice(0, -1)) {
+			c.linkActive = true;
+		}
 
-        if(navInfo.pageName) {
-            crumbs.push({
-                url: navInfo.pageUrl,
-                name: navInfo.pageName,
-            })
-        }
+		return crumbs;
+	}
 
-        for(let c of crumbs.slice(0, -1)) {
-            c.linkActive = true;
-        }
-
-        return crumbs;
-    }
-
-    $: breadcrumbs = buildCrumbs($currentStrategy, $page);
+	$: breadcrumbs = buildCrumbs($currentStrategy, $page);
 </script>
 
 <nav aria-label="breadcrumb breadcrumb-gray" data-test-id="breadcrumb">

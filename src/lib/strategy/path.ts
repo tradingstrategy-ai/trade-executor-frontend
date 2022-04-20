@@ -9,9 +9,9 @@ import type { CurrentStrategyInfo } from '../state/store';
 interface StrategyNavigationInfo {
 	strategyName: string;
 	baseUrl: string;
-    pageUrl?: string;
+	pageUrl?: string;
 	pageName: string;
-    segments: string[];
+	segments: string[];
 }
 
 // Map the page slug to longer name.
@@ -34,22 +34,22 @@ export function parseStrategyPath(
 ): StrategyNavigationInfo {
 	assert(currentStrategy, 'currentStrategy is null');
 
-    const segments = page.routeId.split('/');
+	const segments = page.routeId.split('/');
 	const pageSegment = segments.at(2);
 	const pageName = pageNames[pageSegment];
 	const baseUrl = `/strategy/${currentStrategy.id}`;
 
-    let pageUrl;
-    if(pageSegment) {
-        pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
-    } else {
-        pageUrl = `/strategy/${currentStrategy.id}`;
-    }
+	let pageUrl;
+	if (pageSegment) {
+		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
+	} else {
+		pageUrl = `/strategy/${currentStrategy.id}`;
+	}
 	return {
 		strategyName: currentStrategy.name,
 		baseUrl,
-        pageUrl,
+		pageUrl,
 		pageName,
-        segments,
+		segments
 	};
 }

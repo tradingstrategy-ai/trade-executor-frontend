@@ -5,6 +5,9 @@
 	$: closedPositions = $portfolio?.closed_positions;
 </script>
 
-<h1>Closed positions</h1>
-
-<PositionList positions={closedPositions} columns={{ closed_at: true }} stats={$stats} />
+<PositionList
+	positions={closedPositions}
+	columns={{ closed_at: true }}
+	stats={$stats}
+	pagination={true}
+/>

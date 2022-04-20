@@ -12,10 +12,21 @@ Used for
 Usage:
 
     <PositionList positions={positions} />
+
+Based on Grid.js and svelte-simple-datatables:
+- https://gridjs.io/
+- https://github.com/grid-js/gridjs
+- https://github.com/iamyuu/gridjs-svelte
+- https://gridjs.io/docs/integrations/svelte/
+- https://svelte.dev/repl/e772220feac54e65b132615ac4d8eb09?version=3.47.0
+- https://gridjs.io/docs/config/columns
+
+Unfortunately there can be only one svelte-simple-datatables per page.
 -->
 <script lang="ts">
-	import '../styles/datatable.css';
-	import { Datatable } from 'svelte-simple-datatables';
+	import Grid from 'gridjs-svelte';
+	import { html } from 'gridjs';
+	import 'gridjs/dist/theme/mermaid.css';
 	import type { Stats, TradingPosition } from '../state/interface';
 	import { createCombinedPositionList } from '../state/stats';
 	import {
@@ -47,31 +58,12 @@ Usage:
 	 */
 	export let columns = {};
 
-	export let defaultColumns = {
-		position_id: true,
-		ticker: true,
-		profitability: true,
-		size: true
-	};
+	/**
+	 * Is pagination enabled
+	 */
+	export let pagination = true;
 
-	// https://vincjo.fr/svelte-simple-datatables/#/settings
-	let defaultDatatableSettings = {
-		columnFilter: false,
-		sortable: true,
-		pagination: true,
-		rowsPerPage: 50,
-		scrollY: false,
-		css: false,
-		blocks: {
-			searchInput: true,
-			paginationButtons: true,
-			paginationRowCount: true
-		}
-	};
-
-	let combinedSettings = { ...defaultDatatableSettings, ...settings };
-
-	let activeColumns = { ...defaultColumns, ...columns };
+	export let sort = '-position_id';
 
 	// Convert position list to suitable format for our presentation
 	function transformTabularData(_positions, _stats) {
@@ -84,75 +76,105 @@ Usage:
 		return combined;
 	}
 
-	$: data = transformTabularData(positions, stats);
+	const gridJsColums = [
+		{
+			id: 'position_id',
+			name: 'Id',
+			sort: {
+				enabled: true
+			}
+		},
+		{
+			id: 'ticker',
+			name: 'Ticker',
+			sort: {
+				enabled: true
+			}
+		},
+		{
+			id: 'profitability',
+			name: 'Profitability',
+			sort: {
+				enabled: true
+			},
+			formatter: (cell) => {
+				const value = formatProfitability(cell);
+				const klass = cell >= 0 ? 'profit-green' : 'profit-red';
+				return html(`<span class="${klass}">${value}</span>`);
+			}
+		},
+		{
+			id: 'value',
+			name: 'Value',
+			sort: {
+				enabled: true
+			},
+			formatter: (cell) => {
+				return formatDollar(cell);
+			}
+		}
+	];
 
-	let rows;
+	if (columns.opened_at) {
+		gridJsColums.push({
+			id: 'opened_at',
+			name: 'Opened',
+			formatter: (cell) => {
+				return formatUnixTimestampAsHours(cell);
+			},
+			sort: {
+				enabled: true
+			}
+		});
+	}
+
+	if (columns.closed_at) {
+		gridJsColums.push({
+			id: 'closed_at',
+			name: 'Closed',
+			formatter: (cell) => {
+				return formatUnixTimestampAsHours(cell);
+			},
+			sort: {
+				enabled: true
+			}
+		});
+	}
+
+	gridJsColums.push({
+		id: 'details',
+		sort: {
+			enabled: false
+		},
+		name: '',
+		formatter: (cell) => {
+			return html("<a href=''>Details</a>");
+		}
+	});
+
+	let language = {
+		search: {
+			placeholder: 'Search token...'
+		}
+	};
+
+	let gridJsPagination;
+
+	if (pagination) {
+		gridJsPagination = {
+			enabled: true,
+			limit: 20,
+			summary: false
+		};
+	} else {
+		gridJsPagination = null;
+	}
+
+	$: data = transformTabularData(positions, stats);
 </script>
 
 {#if data.length > 0}
-	<Datatable
-		settings={combinedSettings}
-		{data}
-		bind:dataRows={rows}
-		classList="datatable-positions"
-	>
-		<thead>
-			<tr>
-				<th data-key="position_id" class="th-positions sortable">Id <span /></th>
-				<th data-key="ticker" class="th-positions sortable">Pair <span /></th>
-				<th data-key="profitability" class="th-positions sortable">Profit <span /></th>
-				<th data-key="size" class="th-positions sortable">Size <span /></th>
-
-				{#if activeColumns.opened_at}
-					<th data-key="opened_at" class="th-positions col-opened-at sortable">Opened <span /></th>
-				{/if}
-
-				{#if activeColumns.closed_at}
-					<th data-key="last_trade_at" class="th-positions col-closed-at sortable">
-						Closed <span />
-					</th>
-				{/if}
-
-				<th />
-			</tr>
-		</thead>
-		<tbody>
-			{#if rows}
-				{#each $rows as row}
-					<tr>
-						<td>{row.position_id}</td>
-						<td>
-							{row.ticker}
-						</td>
-
-						<td class:profit-green={row.profitability > 0} class:profit-red={row.profitability < 0}>
-							{formatProfitability(row.profitability)}
-						</td>
-
-						<td>
-							{formatDollar(row.value)}
-						</td>
-
-						{#if activeColumns.opened_at}
-							<td class="col-opened-at">
-								{formatUnixTimestampAsHours(row.opened_at)}
-							</td>
-						{/if}
-
-						{#if activeColumns.closed_at}
-							<td class="col-closed-at">
-								{formatUnixTimestampAsHours(row.last_trade_at)}
-							</td>
-						{/if}
-
-						<td>
-							<a href="#"> Details </a>
-						</td>
-					</tr>
-				{/each}
-			{/if}
-		</tbody>
-	</Datatable>
+	<Grid search sort pagination={gridJsPagination} {data} columns={gridJsColums} {language} />
 {:else}
 	<p>No positions.</p>
 {/if}

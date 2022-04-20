@@ -39,6 +39,8 @@
 		"@lukeed/uuid": "^2.0.0",
 		"assert-ts": "^0.3.4",
 		"cookie": "^0.4.1",
+		"gridjs": "^5.0.2",
+		"gridjs-svelte": "^2.1.1",
 		"svelte-spinner": "^2.0.2"
 	}
 }
