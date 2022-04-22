@@ -34,13 +34,15 @@ Usage:
 			{
 				url: '/strategy',
 				name: 'Strategies'
-			},
-
-			{
-				url: navInfo.baseUrl,
-				name: navInfo.strategyName
 			}
 		];
+
+        if(navInfo.strategyName) {
+            crumbs.push({
+				url: navInfo.baseUrl,
+				name: navInfo.strategyName
+			});
+        }
 
 		if (navInfo.pageName) {
 			crumbs.push({

@@ -5,9 +5,10 @@
 import assert from 'assert-ts';
 import type { Page } from '@sveltejs/kit';
 import type { CurrentStrategyInfo } from '../state/store';
+import strategy from "../../routes/strategy/index.svelte";
 
 interface StrategyNavigationInfo {
-	strategyName: string;
+	strategyName?: string;
 	baseUrl: string;
 	pageUrl?: string;
 	pageName: string;
@@ -38,19 +39,28 @@ export function parseStrategyPath(
 	const segments = page.routeId.split('/');
 	const pageSegment = segments.at(2);
 	const positionId = page.params.position_id;
-	const pageName = pageNames[pageSegment];
 	const baseUrl = `/strategy/${currentStrategy.id}`;
-
+    let pageName = pageNames[pageSegment];
+    let strategyName = currentStrategy?.name;
 	let pageUrl;
+
 	if (positionId) {
+        // Individual position page
 		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}/${positionId}`;
 	} else if (pageSegment) {
+        // Strategy subpages
 		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
-	} else {
+	} else if(segments.length >= 2) {
+        // Root for a single strategy
 		pageUrl = `/strategy/${currentStrategy.id}`;
-	}
+	} else {
+        // Strategies root
+        pageName = "Overview";
+        pageUrl = `/strategy`;
+        strategyName = null;
+    }
 	return {
-		strategyName: currentStrategy.name,
+		strategyName,
 		baseUrl,
 		pageUrl,
 		pageName,

@@ -12,14 +12,16 @@ import type { StrategyConfiguration } from './configuration';
  */
 export interface StrategyMetadata {
 	id: string;
-	name: string;
-	short_description: string;
-	long_description: string;
-	icon_url: string;
-	started_at: number;
+	name?: string;
+	short_description?: string;
+	long_description?: string;
+	icon_url?: string;
+	started_at?: number;
 	// Link to the strategy page, generated on the client side
 	link: string;
 	config: StrategyConfiguration;
+    //
+    error?: string;
 }
 
 /**
@@ -29,6 +31,8 @@ export interface StrategyMetadata {
  */
 export async function getStrategiesWithMetadata(fetch): Promise<StrategyMetadata[]> {
 	const strats = getConfiguredStrategies();
+
+    /*
 	const exampleData = [
 		{
 			id: strats[0].id,
@@ -41,9 +45,31 @@ export async function getStrategiesWithMetadata(fetch): Promise<StrategyMetadata
 			link: `/strategy/${strats[0].id}`,
 			started_at: 0
 		}
-	];
+	];*/
 
-	return new Promise((resolve, reject) => {
-		resolve(exampleData);
-	});
+    // Load metadata for all strategies parallel
+    const metadatas = await Promise.all(strats.map(async strat => {
+         const resp = await fetch(`${strat.url}/metadata`);
+         let error, meta;
+         if(resp.ok) {
+             meta = await resp.json();
+             error = null;
+         } else {
+             meta = {};
+             error = resp.statusText;
+         }
+         return {
+			id: strat.id,
+			name: meta.name,
+			short_description: meta.short_description,
+			long_description: meta.long_description,
+			icon_url: meta.icon_url,
+			config: strats,
+			link: `/strategy/${strats[0].id}`,
+			started_at: meta.started_at,
+            error: error,
+		}
+    }));
+
+    return metadatas;
 }
