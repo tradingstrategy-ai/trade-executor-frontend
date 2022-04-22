@@ -320,7 +320,7 @@ export function formatUnixTimestampAsDate(ts: number): string {
  * Format UNIX timestamp as hours:minutes
  * @param ts Timestamp in seconds
  */
-export function formatUnixTimestampAsHours(ts: number, newlined = false): string {
+export function formatUnixTimestampAsHours(ts: number, newlined = false, seconds= false): string {
 	if (!ts) {
 		return '---';
 	}
@@ -329,10 +329,15 @@ export function formatUnixTimestampAsHours(ts: number, newlined = false): string
 	const day = d.toLocaleDateString('en-us', { day: '2-digit' });
 	const month = d.toLocaleDateString('en-us', { month: '2-digit' });
 	const year = d.toLocaleDateString('en-us', { year: 'numeric' });
-	const time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false });
+    let time;
+    if(seconds) {
+        time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false, second: '2-digit' });
+    } else {
+        time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
 
 	if (newlined) {
-		return `${year}-${month}<br>${day} ${time}`;
+		return `${year}-${month}-${day}<br>${time}`;
 	} else {
 		return `${year}-${month}-${day} ${time}`;
 	}
