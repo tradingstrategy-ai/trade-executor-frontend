@@ -18,10 +18,17 @@ Display strategy execution overview information as Bootstrap 4 card..
 		<div class="card">
 			<div class="card-header">Current assets</div>
 			<ul class="list-group list-group-flush">
-				<li class="list-group-item">Total equity: {formatDollar(portfolioStats.total_equity)}</li>
-				<li class="list-group-item">Cash: {formatDollar(portfolioStats.free_cash)}</li>
 				<li class="list-group-item">
-					Portfolio last valued at: <TimeAgo time={portfolioStats.calculated_at} />
+                    Value in trading positions: <strong>{formatDollar(portfolioStats.total_equity)}</strong>
+                </li>
+				<li class="list-group-item">Cash:
+                    <strong>{formatDollar(portfolioStats.free_cash)}</strong>
+                </li>
+				<li class="list-group-item">
+					Last valuation:
+                    <strong>
+                        <TimeAgo time={portfolioStats.calculated_at} />
+                    </strong>
 				</li>
 			</ul>
 		</div>
