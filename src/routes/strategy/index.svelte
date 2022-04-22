@@ -1,11 +1,11 @@
 <script context="module">
 	import { getConfiguredStrategies } from 'trade-executor-frontend/strategy/configuration';
+	import { getStrategiesWithMetadata } from 'trade-executor-frontend/strategy/metadata';
 
-	export async function load() {
-		let strategies = getConfiguredStrategies();
+	export async function load({ fetch }) {
+		let strategies = await getStrategiesWithMetadata(fetch);
 
-		console.log(strategies);
-
+		// Laod metadata from all strategies
 		return {
 			props: {
 				strategies
@@ -15,17 +15,23 @@
 </script>
 
 <script lang="ts">
+	import StrategyOverview from 'trade-executor-frontend/strategy/StrategyOverview.svelte';
+
 	export let strategies;
 </script>
 
-{#if strategies.length > 0}
-	<h1>Available strategies</h1>
+<div class="container">
+	{#if strategies.length > 0}
+		<h1>Trading strategies</h1>
 
-	{#each strategies as strategy}
-		<p>
-			<a href="/strategy/{strategy.id}">{strategy.name}</a>
-		</p>
-	{/each}
-{:else}
-	<p>No strategies configured</p>
-{/if}
+		<p>Currently running trading strategies.</p>
+
+		<div class="card-deck">
+			{#each strategies as strategy}
+				<StrategyOverview {strategy} />
+			{/each}
+		</div>
+	{:else}
+		<p>No strategies configured</p>
+	{/if}
+</div>

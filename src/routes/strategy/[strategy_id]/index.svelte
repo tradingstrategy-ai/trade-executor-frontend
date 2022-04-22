@@ -5,11 +5,11 @@
 </script>
 
 <div class="overview-card-wrapper">
-    <AssetOverview />
+	<AssetOverview />
 </div>
 
 <div class="overview-card-wrapper">
-    <PerformanceOverview />
+	<PerformanceOverview />
 </div>
 
 <div class="strategy-menu-mobile">
@@ -27,7 +27,7 @@
 		}
 	}
 
-    .overview-card-wrapper {
-        margin-bottom: 20px;
-    }
+	.overview-card-wrapper {
+		margin-bottom: 20px;
+	}
 </style>

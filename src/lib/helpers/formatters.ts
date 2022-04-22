@@ -152,7 +152,6 @@ export function formatDollar(n: number, minFrag = 2, maxFrag = 2, prefix = '$'):
 	}
 }
 
-
 /**
  * Format extreme large or small amounts human friendly manner.
  *
@@ -163,13 +162,12 @@ export function formatDollar(n: number, minFrag = 2, maxFrag = 2, prefix = '$'):
  * @param maxFrag
  */
 export function formatTokenAmount(x: number, minFrag = 2, maxFrag = 2, prefix = ''): string {
+	assert(typeof x == 'number', `Was not a number: ${x}`);
 
-    assert(typeof x == "number", `Was not a number: ${x}`);
+	// Consider negative quantities
+	const n = Math.abs(x);
 
-    // Consider negative quantities
-    const n = Math.abs(x);
-
-    if (n === undefined || n === null) {
+	if (n === undefined || n === null) {
 		// Plz avoid ending here
 		return '---';
 	}
@@ -196,13 +194,12 @@ export function formatTokenAmount(x: number, minFrag = 2, maxFrag = 2, prefix = 
 		);
 	} else if (n < 1) {
 		// Format funny tokens
-		const res = (
+		const res =
 			prefix +
 			x.toLocaleString('en', {
 				maximumFractionDigits: 5
-			})
-		);
-        return res;
+			});
+		return res;
 	}
 
 	if (n >= 1000 * 1000 * 1000) {
@@ -323,7 +320,7 @@ export function formatUnixTimestampAsDate(ts: number): string {
  * Format UNIX timestamp as hours:minutes
  * @param ts Timestamp in seconds
  */
-export function formatUnixTimestampAsHours(ts: number, newlined=false): string {
+export function formatUnixTimestampAsHours(ts: number, newlined = false): string {
 	if (!ts) {
 		return '---';
 	}
@@ -334,11 +331,11 @@ export function formatUnixTimestampAsHours(ts: number, newlined=false): string {
 	const year = d.toLocaleDateString('en-us', { year: 'numeric' });
 	const time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false });
 
-    if(newlined) {
-        return `${year}-${month}<br>${day} ${time}`;
-    } else {
-        return `${year}-${month}-${day} ${time}`;
-    }
+	if (newlined) {
+		return `${year}-${month}<br>${day} ${time}`;
+	} else {
+		return `${year}-${month}-${day} ${time}`;
+	}
 }
 
 /**

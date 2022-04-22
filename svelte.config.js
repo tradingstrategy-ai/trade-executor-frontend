@@ -16,13 +16,13 @@ const config = {
 			allowed: ['PATCH', 'DELETE']
 		},
 
-        vite: {
-            resolve: {
-                alias: {
-                    'trade-executor-frontend': path.resolve('src/lib')
-                }
-            }
-        }
+		vite: {
+			resolve: {
+				alias: {
+					'trade-executor-frontend': path.resolve('src/lib')
+				}
+			}
+		}
 	}
 };
 

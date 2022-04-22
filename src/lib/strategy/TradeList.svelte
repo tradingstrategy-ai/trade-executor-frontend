@@ -20,22 +20,23 @@ Based on Grid.js and svelte-simple-datatables:
 -->
 <script lang="ts">
 	import Grid from 'gridjs-svelte';
-    import { html } from 'gridjs';
+	import { html } from 'gridjs';
 	import 'gridjs/dist/theme/mermaid.css';
 
 	import type { TradeExecution, TradingPosition } from '../state/interface';
-    import {
-        formatUnixTimestampAsHours,
-        formatDollar,
-        formatAmount, formatTokenAmount
-    } from '../helpers/formatters';
+	import {
+		formatUnixTimestampAsHours,
+		formatDollar,
+		formatAmount,
+		formatTokenAmount
+	} from '../helpers/formatters';
 
 	/**
 	 * List of position trades
 	 */
 	export let trades: Record<number, TradeExecution>;
 
-    export let position: TradingPosition;
+	export let position: TradingPosition;
 
 	/**
 	 * Datatable settings overrides.
@@ -60,11 +61,11 @@ Based on Grid.js and svelte-simple-datatables:
 				enabled: true
 			},
 			formatter: (cell, row) => {
-                if(cell.warning) {
-                    return html(`<span class=warning>${cell.id}</span>`);
-                } else {
-                    return cell.id;
-                }
+				if (cell.warning) {
+					return html(`<span class=warning>${cell.id}</span>`);
+				} else {
+					return cell.id;
+				}
 			}
 		},
 		{
@@ -73,7 +74,7 @@ Based on Grid.js and svelte-simple-datatables:
 			sort: {
 				enabled: true
 			},
-		    formatter: (cell) => {
+			formatter: (cell) => {
 				return html(formatUnixTimestampAsHours(cell, true));
 			}
 		},
@@ -83,7 +84,7 @@ Based on Grid.js and svelte-simple-datatables:
 			sort: {
 				enabled: true
 			},
-		    formatter: (cell) => {
+			formatter: (cell) => {
 				return html(formatUnixTimestampAsHours(cell, true));
 			}
 		},
@@ -121,30 +122,32 @@ Based on Grid.js and svelte-simple-datatables:
 		gridJsPagination = null;
 	}
 
-    // Massage data
-    function transformData(trades): object[] {
-        let result = []
-        for(let t of Object.values(trades)) {
-            let o = {...t}
-            // Decimal string -> float conversion
-            o.quantity = o.executed_quantity ? parseFloat(o.executed_quantity) : parseFloat(o.planned_quantity);
-            o.value = o.executed_reserve ? parseFloat(o.executed_reserve) : parseFloat(o.planned_reserve);
-            // If we did not execute the trade set the warning flag
-            o.id_and_warning = { id: o.trade_id, warning: !o.executed_at };
-            result.push(o);
-        }
-        return result;
-    }
+	// Massage data
+	function transformData(trades): object[] {
+		let result = [];
+		for (let t of Object.values(trades)) {
+			let o = { ...t };
+			// Decimal string -> float conversion
+			o.quantity = o.executed_quantity
+				? parseFloat(o.executed_quantity)
+				: parseFloat(o.planned_quantity);
+			o.value = o.executed_reserve ? parseFloat(o.executed_reserve) : parseFloat(o.planned_reserve);
+			// If we did not execute the trade set the warning flag
+			o.id_and_warning = { id: o.trade_id, warning: !o.executed_at };
+			result.push(o);
+		}
+		return result;
+	}
 
-    const className = {
-        table: 'table-trades'
-    };
+	const className = {
+		table: 'table-trades'
+	};
 
 	$: data = transformData(trades);
 </script>
 
 {#if data.length > 0}
-	<Grid sort className={className} {data} columns={gridJsColums} />
+	<Grid sort {className} {data} columns={gridJsColums} />
 {:else}
 	<p>No trades.</p>
 {/if}
@@ -155,9 +158,8 @@ Based on Grid.js and svelte-simple-datatables:
 	}
 
 	:global(.table-trades.gridjs-table .warning):before {
-        content: '⚠️ ';
-        color: red;
+		content: '⚠️ ';
+		color: red;
 		font-size: 150%;
 	}
-
 </style>

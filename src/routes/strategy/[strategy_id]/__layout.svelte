@@ -2,8 +2,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 
-	import { loadStrategyById } from '../../../lib/state/store';
-
+	import { loadStrategyById } from 'trade-executor-frontend/state/store';
 	import StrategyHeader from 'trade-executor-frontend/strategy/StrategyHeader.svelte';
 	import StrategyLoadIndicator from 'trade-executor-frontend/strategy/StrategyLoadIndicator.svelte';
 	import StrategyMenu from 'trade-executor-frontend/strategy/StrategyMenu.svelte';

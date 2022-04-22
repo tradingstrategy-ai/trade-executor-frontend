@@ -21,9 +21,15 @@ Usage:
 	import { parseStrategyPath } from '../strategy/path';
 	import { currentStrategy, portfolio, stats } from '../state/store';
 	import { PositionKind } from '../state/interface';
-	import { formatUnixTimestampAsHours, formatDuration, formatProfitability, formatDollar, formatAmount } from '../helpers/formatters';
-    import {getPositionLatestStats} from "../state/stats";
-    import TradeList from "./TradeList.svelte";
+	import {
+		formatUnixTimestampAsHours,
+		formatDuration,
+		formatProfitability,
+		formatDollar,
+		formatAmount
+	} from '../helpers/formatters';
+	import { getPositionLatestStats } from '../state/stats';
+	import TradeList from './TradeList.svelte';
 
 	export let positionKind: PositionKind;
 
@@ -45,7 +51,7 @@ Usage:
 				throw new Error('What?');
 			}
 
-            positionStats = getPositionLatestStats(positionId, $stats);
+			positionStats = getPositionLatestStats(positionId, $stats);
 		} else {
 			position = null;
 		}
@@ -56,14 +62,13 @@ Usage:
 	<h2>Overview</h2>
 
 	<table class="table">
-
 		<tr>
 			<th>Pair</th>
 			<td>
-                <a href={position.pair.info_url}>
-                    {position.pair.base.token_symbol} - {position.pair.quote.token_symbol}
-                </a>
-            </td>
+				<a href={position.pair.info_url}>
+					{position.pair.base.token_symbol} - {position.pair.quote.token_symbol}
+				</a>
+			</td>
 		</tr>
 
 		<tr>
@@ -83,54 +88,56 @@ Usage:
 			</tr>
 		{/if}
 
-        <tr>
-            <th>Profitability</th>
-            <td class:profit-green={positionStats.profitability >=0} class:profit-red={positionStats.profitability < 0}>
-                {formatProfitability(positionStats.profitability)}
-            </td>
-        </tr>
+		<tr>
+			<th>Profitability</th>
+			<td
+				class:profit-green={positionStats.profitability >= 0}
+				class:profit-red={positionStats.profitability < 0}
+			>
+				{formatProfitability(positionStats.profitability)}
+			</td>
+		</tr>
 
-        {#if position.closed_at}
-            <tr>
-                <th>Value (highest)</th>
-                <td>
-                    {formatDollar(positionStats.value_at_max)}
-                </td>
-            </tr>
+		{#if position.closed_at}
+			<tr>
+				<th>Value (highest)</th>
+				<td>
+					{formatDollar(positionStats.value_at_max)}
+				</td>
+			</tr>
 
-            <tr>
-                <th>Value (at open)</th>
-                <td>
-                    {formatDollar(positionStats.value_at_open)}
-                </td>
-            </tr>
-        {:else}
-            <tr>
-                <th>Value</th>
-                <td>
-                    {formatDollar(positionStats.value)}
-                </td>
-            </tr>
+			<tr>
+				<th>Value (at open)</th>
+				<td>
+					{formatDollar(positionStats.value_at_open)}
+				</td>
+			</tr>
+		{:else}
+			<tr>
+				<th>Value</th>
+				<td>
+					{formatDollar(positionStats.value)}
+				</td>
+			</tr>
 
-            <tr>
-                <th>Units</th>
-                <td>
-                    {formatAmount(positionStats.equity)} {position.pair.base.token_symbol}
-                </td>
-            </tr>
-        {/if}
+			<tr>
+				<th>Units</th>
+				<td>
+					{formatAmount(positionStats.equity)}
+					{position.pair.base.token_symbol}
+				</td>
+			</tr>
+		{/if}
 
-       <tr>
-            <th>Last revaluation</th>
-            <td>
-                {formatUnixTimestampAsHours(position.last_pricing_at)}
-            </td>
-        </tr>
+		<tr>
+			<th>Last revaluation</th>
+			<td>
+				{formatUnixTimestampAsHours(position.last_pricing_at)}
+			</td>
+		</tr>
 	</table>
 
-    <h2>Trades</h2>
+	<h2>Trades</h2>
 
-    <TradeList trades={position.trades} position={position} />
+	<TradeList trades={position.trades} {position} />
 {/if}
-
-

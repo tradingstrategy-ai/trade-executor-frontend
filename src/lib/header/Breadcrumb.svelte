@@ -68,18 +68,7 @@ Usage:
 				itemscope
 				itemtype="http://schema.org/ListItem"
 			>
-				{#if breadcrumb.head || !breadcrumb.url}
-					<a
-						itemprop="item"
-						href={breadcrumb.url}
-						itemtype="http://schema.org/Thing"
-						class="breadcrumb-head"
-					>
-						<span itemprop="name">
-							{breadcrumb.name}
-						</span>
-					</a>
-				{:else if breadcrumb.linkActive}
+				{#if breadcrumb.linkActive}
 					<a itemprop="item" href={breadcrumb.url} itemtype="http://schema.org/Thing">
 						<span itemprop="name">
 							{breadcrumb.name}
@@ -88,7 +77,7 @@ Usage:
 				{:else}
 					<span itemprop="item" href={breadcrumb.url} itemtype="http://schema.org/Thing">
 						<span itemprop="name">
-							{breadcrumb.name}
+							{breadcrumb.name || "Overview"}
 						</span>
 					</span>
 				{/if}

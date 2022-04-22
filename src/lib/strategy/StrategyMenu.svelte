@@ -28,7 +28,7 @@ Display strategy menu in
 			<a class="nav-link" href={baseUrl}>Overview</a>
 		</li>
 
-        <!--
+		<!--
 
 		<li class="nav-item">
 			<a class="nav-link" href={baseUrl}>Performance</a>
@@ -61,7 +61,7 @@ Display strategy menu in
 			</li>
 		{/if}
 
-        <!--
+		<!--
 
 		<li class="nav-item">
 			<a class="nav-link" href="#">Deposits and withdraws</a>
