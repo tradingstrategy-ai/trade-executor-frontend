@@ -10,21 +10,4 @@
 	<slot />
 </main>
 
-<style>
-	:global(:root) {
-		--profit-green: #458b00;
-		--profit-red: #cc0000;
-		--profit-black: #000;
-	}
 
-	/**
-     * Price action and candle colors
-     */
-	:global(.profit-green) {
-		color: var(--profit-green);
-	}
-
-	:global(.profit-red) {
-		color: var(--profit-red);
-	}
-</style>

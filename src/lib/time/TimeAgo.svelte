@@ -5,7 +5,7 @@ Display time ago widget.
 -->
 <script lang="ts">
 	import assert from 'assert-ts';
-	import { formatUnixTimestampAsHours } from '$lib/helpers/formatters';
+	import { formatUnixTimestampAsHours } from '../helpers/formatters';
 
 	export let time;
 	export let mode = 'minutes';

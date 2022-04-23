@@ -1,44 +1,41 @@
-<!--
-@component
-
-Renders a strategy overview in strategy listing.
-
-Related Bootstrap example: https://getbootstrap.com/docs/4.3/components/card/#horizontal
--->
 <script lang="ts">
-    import { goto } from '$app/navigation';
+	import StrategyMenu from 'trade-executor-frontend/strategy/StrategyMenu.svelte';
+	import AssetOverview from 'trade-executor-frontend/strategy/AssetOverview.svelte';
+	import PerformanceOverview from 'trade-executor-frontend/strategy/PerformanceOverview.svelte';
+    import type {StrategyMetadata} from "./metadata";
 
-	import type { StrategyMetadata } from './metadata';
+    export let metadata: StrategyMetadata;
 
-	export let strategy: StrategyMetadata;
-
-    function handleClick(e) {
-        goto(strategy.link);
-    }
 </script>
 
-<div class="card mb-3" style="max-width: 540px;" on:click={handleClick}>
-	<div class="row no-gutters">
-		<div class="col-md-4 col-left" style={`background-image: url(${strategy.icon_url})`}>
-			<!-- Image styles here using background CSS -->
-		</div>
-		<div class="col-md-8">
-			<div class="card-body">
-				<h5 class="card-title">{strategy.name}</h5>
-				<p class="card-text">{strategy.short_description}.</p>
-				<a href={strategy.link} class="card-link">View strategy</a>
-			</div>
-		</div>
-	</div>
+{#if metadata}
+    <p class="lead">{@html metadata.long_description}</p>
+{/if}
+
+<div class="overview-card-wrapper">
+	<AssetOverview />
 </div>
 
+<div class="overview-card-wrapper">
+	<PerformanceOverview />
+</div>
+
+<div class="strategy-menu-mobile">
+	<StrategyMenu />
+</div>
 
 <style>
-    .card {
-        cursor: pointer;
-    }
+	.strategy-menu-mobile {
+		display: none;
+	}
 
-    .col-left {
-        background-size: cover;
-    }
+	@media (max-width: 992px) {
+		.strategy-menu-mobile {
+			display: block;
+		}
+	}
+
+	.overview-card-wrapper {
+		margin-bottom: 20px;
+	}
 </style>

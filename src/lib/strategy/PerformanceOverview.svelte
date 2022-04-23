@@ -8,6 +8,7 @@ Display strategy execution overview information as Bootstrap 4 card..
 	import { getPortfolioLatestStats } from '../state/stats';
 	import { formatDollar } from '$lib/helpers/formatters';
 	import { determineProfitColourClass } from '../helpers/profit';
+    import StrategyOverviewCard from "./StrategyOverviewCard.svelte";
 
 	// See https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/statistics.py#L67
 	$: portfolioStats = getPortfolioLatestStats($currentStrategy.state);
@@ -20,7 +21,7 @@ Display strategy execution overview information as Bootstrap 4 card..
 
 {#if portfolioStats}
 	<div class="overview-details">
-		<div class="card">
+		<StrategyOverviewCard>
 			<div class="card-header">Performance</div>
 
 			<ul class="list-group list-group-flush">
@@ -51,7 +52,7 @@ Display strategy execution overview information as Bootstrap 4 card..
 					</li>
 				</span>
 			</ul>
-		</div>
+		</StrategyOverviewCard>
 	</div>
 {:else}
 	<!-- <p>Stats not available.</p> -->

@@ -1,11 +1,15 @@
 /**
- * Strategy metadata fecthing.
+ * Strategy metadata fetching.
  */
 
 import { getConfiguredStrategies } from './configuration';
 import type { StrategyConfiguration } from './configuration';
 
 /**
+ * Metadata describes strategy information not related to the profit generation.
+ *
+ * This is bits like name, description, icon and executor uptime.
+ *
  * TypeScript helper for having frontend side configuration for strategies.
  *
  * See https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/metadata.py
@@ -24,14 +28,7 @@ export interface StrategyMetadata {
     error?: string;
 }
 
-/**
- * Get list of configured strategies and pings server for the latest metadata.
- *
- * Typedefs JSON load from the config.
- */
-export async function getStrategiesWithMetadata(fetch): Promise<StrategyMetadata[]> {
-	const strats = getConfiguredStrategies();
-
+export async function getStrategiesWithMetedata(strats: StrategyConfiguration[], fetch): Promise<StrategyMetadata[]> {
     /*
 	const exampleData = [
 		{
@@ -48,7 +45,7 @@ export async function getStrategiesWithMetadata(fetch): Promise<StrategyMetadata
 	];*/
 
     // Load metadata for all strategies parallel
-    const metadatas = await Promise.all(strats.map(async strat => {
+    return await Promise.all(strats.map(async strat => {
          const resp = await fetch(`${strat.url}/metadata`);
          let error, meta;
          if(resp.ok) {
@@ -64,12 +61,33 @@ export async function getStrategiesWithMetadata(fetch): Promise<StrategyMetadata
 			short_description: meta.short_description,
 			long_description: meta.long_description,
 			icon_url: meta.icon_url,
-			config: strats,
+			config: strat,
 			link: `/strategy/${strats[0].id}`,
 			started_at: meta.started_at,
             error: error,
 		}
     }));
 
-    return metadatas;
+}
+
+/**
+ * Get list of configured strategies and pings server for the latest metadata.
+ *
+ * Typedefs JSON load from the config.
+ */
+export async function getConfiguredStrategiesWithMetadata(fetch): Promise<StrategyMetadata[]> {
+	const strats = getConfiguredStrategies();
+    return await getStrategiesWithMetedata(strats, fetch);
+
+}
+
+
+/**
+ * Get metadata for a single strategy
+ *
+ * @param strategyConfig
+ */
+export async function getStrategyMetadata(strategyConfig: StrategyConfiguration, fetch): Promise<StrategyMetadata> {
+    const arr = await getStrategiesWithMetedata( [strategyConfig], fetch);
+    return arr[0];
 }

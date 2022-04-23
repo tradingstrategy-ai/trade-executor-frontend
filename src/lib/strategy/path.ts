@@ -5,7 +5,6 @@
 import assert from 'assert-ts';
 import type { Page } from '@sveltejs/kit';
 import type { CurrentStrategyInfo } from '../state/store';
-import strategy from "../../routes/strategy/index.svelte";
 
 interface StrategyNavigationInfo {
 	strategyName?: string;

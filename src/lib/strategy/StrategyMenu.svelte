@@ -22,7 +22,7 @@ Display strategy menu in
 	$: closedPositions = Object.keys($portfolio?.closed_positions || {}).length;
 </script>
 
-<div class="card shadow-soft">
+<div class="card">
 	<ul class="nav flex-column">
 		<li class="nav-item">
 			<a class="nav-link" href={baseUrl}>Overview</a>
@@ -82,3 +82,15 @@ Display strategy menu in
 		-->
 	</ul>
 </div>
+
+<style>
+    .card {
+        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+        padding: 12px;
+    }
+
+    .card .nav-link {
+        font-weight: 900;
+        font-size: 0.9rem;
+    }
+</style>

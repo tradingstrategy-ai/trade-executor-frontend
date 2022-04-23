@@ -1,6 +1,14 @@
-# Trade Executor Frontend
+# Trade executor user interface
 
-Web front for [trade executor](https://github.com/tradingstrategy-ai/trade-executor).
+**This package is still in alpha.**
+
+ [Web Frontend for trading strategy executor](https://github.com/tradingstrategy-ai/trade-executor). 
+ 
+ - This is a [SvelteKit](https://kit.svelte.dev/) based frontend library
+ - Display active trading strategies
+ - Display open/closed trading position
+ - Show profitability metrics like profit and loss, trades won
+ - Explore trades
 
 # Features
 
@@ -12,13 +20,33 @@ Web front for [trade executor](https://github.com/tradingstrategy-ai/trade-execu
 
 # Running
 
-Load the demo config and start the dev server:
+The package comes with a demo site with its `.env` configuration file.
+To get started with development do:
 
 ```
-source scripts/demo.env
 npm run dev
 ```
 
-# Writing components
+# Development
+
+## Helpful links
 
 - [Documenting Svelte components](https://svelte.dev/faq#how-do-i-document-my-components)
+
+- [Rich Harris on creating SvelteKit libraries](https://www.youtube.com/watch?v=qD6Pmp45sO4&t=30s)
+
+## Workflow to update routes
+
+[SvelteKit does not support route re-use at the moment](https://stackoverflow.com/questions/71728342/creating-sveltekit-library-with-reusable-routes).
+
+- Update routes in `trade-executor-frontend`
+- Copy-paste `routes/strategy` to `frontend` package
+
+## Release 
+
+To make a new release:
+
+```shell
+npm run package 
+(cd package && npm publish)
+```
