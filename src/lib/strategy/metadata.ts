@@ -4,7 +4,9 @@
 
 import { getConfiguredStrategies } from './configuration';
 import type { StrategyConfiguration } from './configuration';
-import assert from "assert-ts";
+// https://github.com/fram-x/assert-ts/issues/23
+import { assert } from 'assert-ts';
+
 
 /**
  * Metadata describes strategy information not related to the profit generation.

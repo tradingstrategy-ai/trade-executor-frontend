@@ -2,7 +2,9 @@
  * Number and time formatting helpers.
  */
 
-import assert from 'assert-ts';
+// https://github.com/fram-x/assert-ts/issues/23
+import { assert } from 'assert-ts';
+
 
 export function formatKilos(n): string {
 	if (n <= 1000) {

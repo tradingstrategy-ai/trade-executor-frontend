@@ -31,6 +31,11 @@ th.gridjs-th {
 
 .gridjs-table a {
     color: #458b00;
+    text-decoration: none;
+}
+
+.gridjs-table a:hover {
+    color: #cc0000;
 }
 
 .gridjs-pagination .gridjs-pages button,

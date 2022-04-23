@@ -2,7 +2,9 @@
  * Navigation mapping and breadcrumbs..
  */
 
-import assert from 'assert-ts';
+// https://github.com/fram-x/assert-ts/issues/23
+import { assert } from 'assert-ts';
+
 import type { Page } from '@sveltejs/kit';
 import type { CurrentStrategyInfo } from '../state/store';
 

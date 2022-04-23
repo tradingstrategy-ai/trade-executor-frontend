@@ -27,6 +27,12 @@ To get started with development do:
 npm run dev
 ```
 
+# Architecture 
+
+- `src/lib` contains reusable Svelte components to render trading strategy execution
+- `src/routes` contains the default SvelteKit application pages. It needs to be copy-pasted to the parent project as is. 
+  This code is minimal and most of the code is in reusable components.
+
 # Development
 
 ## Helpful links
@@ -41,6 +47,7 @@ npm run dev
 
 - Update routes in `trade-executor-frontend`
 - Copy-paste `routes/strategy` to `frontend` package
+- Update `frontend/package.json` with all dependencies needed to run `trade-executor-frontend`
 
 ## Release 
 
