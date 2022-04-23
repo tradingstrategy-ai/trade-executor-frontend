@@ -1,5 +1,5 @@
 <script context="module">
-    import StrategyOverview from "trade-executor-frontend/strategy/StrategyOverview.svelte";
+    import StrategyOverviewPage from "trade-executor-frontend/strategy/StrategyOverviewPage.svelte";
     import {getConfiguredStrategyById} from "trade-executor-frontend/strategy/configuration";
     import {getStrategyMetadata} from "trade-executor-frontend/strategy/metadata";
 
@@ -21,4 +21,4 @@
     export let metadata;
 </script>
 
-<StrategyOverview metadata={metadata}/>
+<StrategyOverviewPage metadata={metadata}/>

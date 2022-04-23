@@ -1,7 +1,7 @@
 <!--
 @component
 
-Renders a strategy overview in strategy listing.
+Renders a strategy overview in strategy listing using Bootstrap 4 horizontal cards.
 
 Related Bootstrap example: https://getbootstrap.com/docs/4.3/components/card/#horizontal
 -->

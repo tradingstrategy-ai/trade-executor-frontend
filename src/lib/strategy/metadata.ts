@@ -4,6 +4,7 @@
 
 import { getConfiguredStrategies } from './configuration';
 import type { StrategyConfiguration } from './configuration';
+import assert from "assert-ts";
 
 /**
  * Metadata describes strategy information not related to the profit generation.
@@ -46,6 +47,9 @@ export async function getStrategiesWithMetedata(strats: StrategyConfiguration[],
 
     // Load metadata for all strategies parallel
     return await Promise.all(strats.map(async strat => {
+
+        assert(strat.url, `StrategyConfig URL missing: ${strat}`);
+
          const resp = await fetch(`${strat.url}/metadata`);
          let error, meta;
          if(resp.ok) {
@@ -77,7 +81,7 @@ export async function getStrategiesWithMetedata(strats: StrategyConfiguration[],
  */
 export async function getConfiguredStrategiesWithMetadata(fetch): Promise<StrategyMetadata[]> {
 	const strats = getConfiguredStrategies();
-    return await getStrategiesWithMetedata(strats, fetch);
+    return getStrategiesWithMetedata(strats, fetch);
 
 }
 

@@ -1,7 +1,13 @@
+<!--
+@component
+
+Strategy overview page content
+
+-->
 <script lang="ts">
 	import StrategyMenu from 'trade-executor-frontend/strategy/StrategyMenu.svelte';
-	import AssetOverview from 'trade-executor-frontend/strategy/AssetOverview.svelte';
-	import PerformanceOverview from 'trade-executor-frontend/strategy/PerformanceOverview.svelte';
+	import AssetOverviewCard from 'trade-executor-frontend/strategy/AssetOverviewCard.svelte';
+	import PerformanceOverviewCard from 'trade-executor-frontend/strategy/PerformanceOverviewCard.svelte';
     import type {StrategyMetadata} from "./metadata";
 
     export let metadata: StrategyMetadata;
@@ -13,11 +19,11 @@
 {/if}
 
 <div class="overview-card-wrapper">
-	<AssetOverview />
+	<AssetOverviewCard />
 </div>
 
 <div class="overview-card-wrapper">
-	<PerformanceOverview />
+	<PerformanceOverviewCard />
 </div>
 
 <div class="strategy-menu-mobile">
