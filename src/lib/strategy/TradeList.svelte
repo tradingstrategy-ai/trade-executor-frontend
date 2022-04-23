@@ -22,6 +22,7 @@ Based on Grid.js and svelte-simple-datatables:
 	import Grid from 'gridjs-svelte';
 	import { html } from 'gridjs';
 	import 'gridjs/dist/theme/mermaid.css';
+    import '../styles/gridjs.css';
 
 	import type { TradeExecution, TradingPosition } from '../state/interface';
 	import {
