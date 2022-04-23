@@ -1,0 +1,45 @@
+/*
+ Grid.js patched styles
+
+ See the original Mermaid SASS theme https://github.com/grid-js/gridjs/tree/master/src/theme/mermaid
+
+ */
+
+.gridjs-wrapper {
+    box-shadow: 0 1px 3px 0 #F2DFCE, 0 1px 2px 0 black;
+    background: #F2DFCE;
+}
+
+table.gridjs-table {
+    border-color: #F2DFCE;
+}
+
+td.gridjs-td {
+    background: #FFF1E5;
+    border-color: #F2DFCE;
+}
+
+th.gridjs-th {
+    background: #F2DFCE;
+    border-color: #F2DFCE;
+}
+
+.gridjs-footer {
+    background: #F2DFCE;
+    box-shadow: 0 1px 3px 0 #F2DFCE, 0 1px 2px 0 black;
+}
+
+.gridjs-table a {
+    color: #458b00;
+}
+
+.gridjs-pagination .gridjs-pages button,
+.gridjs-pagination .gridjs-pages button:disabled,
+.gridjs-pagination .gridjs-pages button.gridjs-spread {
+    background: #FFF1E5;
+    border: 1px solid #F2DFCE;
+}
+
+.gridjs-pagination .gridjs-pages button.gridjs-currentPage {
+    background: #F2DFCE;
+}
