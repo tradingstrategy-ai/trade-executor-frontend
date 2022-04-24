@@ -141,5 +141,5 @@ Usage:
 
 	<TradeList trades={position.trades} {position} />
 {:else}
-	<p>Position data could not be loaded at the moment.</p>
+	<p>Position data could not be loaded at the moment. Position data not available for position #{positionId}</p>
 {/if}
