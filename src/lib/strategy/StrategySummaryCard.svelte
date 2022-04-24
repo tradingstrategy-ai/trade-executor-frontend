@@ -25,7 +25,7 @@ Related Bootstrap example: https://getbootstrap.com/docs/4.3/components/card/#ho
 		<div class="col-md-8">
 			<div class="card-body">
 				<h5 class="card-title">{strategy.name}</h5>
-				<p class="card-text">{strategy.short_description}.</p>
+				<p class="card-text">{strategy.short_description}</p>
 				<a class="card-link btn btn-sm" href={strategy.link}>View details</a>
 			</div>
 		</div>
