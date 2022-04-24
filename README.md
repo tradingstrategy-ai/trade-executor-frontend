@@ -2,13 +2,13 @@
 
 **This package is still in alpha.**
 
- [Web Frontend for trading strategy executor](https://github.com/tradingstrategy-ai/trade-executor). 
- 
- - This is a [SvelteKit](https://kit.svelte.dev/) based frontend library
- - Display active trading strategies
- - Display open/closed trading position
- - Show profitability metrics like profit and loss, trades won
- - Explore trades
+[Web Frontend for trading strategy executor](https://github.com/tradingstrategy-ai/trade-executor).
+
+- This is a [SvelteKit](https://kit.svelte.dev/) based frontend library
+- Display active trading strategies
+- Display open/closed trading position
+- Show profitability metrics like profit and loss, trades won
+- Explore trades
 
 # Features
 
@@ -27,10 +27,10 @@ To get started with development do:
 npm run dev
 ```
 
-# Architecture 
+# Architecture
 
 - `src/lib` contains reusable Svelte components to render trading strategy execution
-- `src/routes` contains the default SvelteKit application pages. It needs to be copy-pasted to the parent project as is. 
+- `src/routes` contains the default SvelteKit application pages. It needs to be copy-pasted to the parent project as is.
   This code is minimal and most of the code is in reusable components.
 
 # Development
@@ -49,11 +49,11 @@ npm run dev
 - Copy-paste `routes/strategy` to `frontend` package
 - Update `frontend/package.json` with all dependencies needed to run `trade-executor-frontend`
 
-## Release 
+## Release
 
 To make a new release:
 
 ```shell
-npm run package 
+npm run package
 (cd package && npm publish)
 ```

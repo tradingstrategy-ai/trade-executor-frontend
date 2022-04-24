@@ -22,7 +22,7 @@ Based on Grid.js and svelte-simple-datatables:
 	import Grid from 'gridjs-svelte';
 	import { html } from 'gridjs';
 	import 'gridjs/dist/theme/mermaid.css';
-    import '../styles/gridjs.css';
+	import '../styles/gridjs.css';
 
 	import type { TradeExecution, TradingPosition } from '../state/interface';
 	import {
@@ -31,7 +31,7 @@ Based on Grid.js and svelte-simple-datatables:
 		formatAmount,
 		formatTokenAmount
 	} from '../helpers/formatters';
-    import {getBlockchainExplorerLink} from "../helpers/chain-explorer";
+	import { getBlockchainExplorerLink } from '../helpers/chain-explorer';
 
 	/**
 	 * List of position trades
@@ -114,10 +114,10 @@ Based on Grid.js and svelte-simple-datatables:
 			id: 'tx_link',
 			name: `Tx`,
 			sort: {
-				enabled: false,
+				enabled: false
 			},
 			formatter: (cell) => {
-                const tx_link = cell;
+				const tx_link = cell;
 				return html(`<a href=${tx_link}>View</a>`);
 			}
 		}
@@ -147,9 +147,9 @@ Based on Grid.js and svelte-simple-datatables:
 			o.value = o.executed_reserve ? parseFloat(o.executed_reserve) : parseFloat(o.planned_reserve);
 			// If we did not execute the trade set the warning flag
 			o.id_and_warning = { id: o.trade_id, warning: !o.executed_at };
-            // Transaction information
-            o.tx_hash = t.tx_info.tx_hash;
-            o.tx_link = getBlockchainExplorerLink(t.tx_info.chain_id, t.tx_info.tx_hash);
+			// Transaction information
+			o.tx_hash = t.tx_info.tx_hash;
+			o.tx_link = getBlockchainExplorerLink(t.tx_info.chain_id, t.tx_info.tx_hash);
 			result.push(o);
 		}
 		return result;

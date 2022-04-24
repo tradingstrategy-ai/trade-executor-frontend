@@ -7,7 +7,6 @@ import type { StrategyConfiguration } from './configuration';
 // https://github.com/fram-x/assert-ts/issues/23
 import { assert } from 'assert-ts';
 
-
 /**
  * Metadata describes strategy information not related to the profit generation.
  *
@@ -27,12 +26,15 @@ export interface StrategyMetadata {
 	// Link to the strategy page, generated on the client side
 	link: string;
 	config: StrategyConfiguration;
-    //
-    error?: string;
+	//
+	error?: string;
 }
 
-export async function getStrategiesWithMetedata(strats: StrategyConfiguration[], fetch): Promise<StrategyMetadata[]> {
-    /*
+export async function getStrategiesWithMetedata(
+	strats: StrategyConfiguration[],
+	fetch
+): Promise<StrategyMetadata[]> {
+	/*
 	const exampleData = [
 		{
 			id: strats[0].id,
@@ -47,33 +49,33 @@ export async function getStrategiesWithMetedata(strats: StrategyConfiguration[],
 		}
 	];*/
 
-    // Load metadata for all strategies parallel
-    return await Promise.all(strats.map(async strat => {
+	// Load metadata for all strategies parallel
+	return await Promise.all(
+		strats.map(async (strat) => {
+			assert(strat.url, `StrategyConfig URL missing: ${strat}`);
 
-        assert(strat.url, `StrategyConfig URL missing: ${strat}`);
-
-         const resp = await fetch(`${strat.url}/metadata`);
-         let error, meta;
-         if(resp.ok) {
-             meta = await resp.json();
-             error = null;
-         } else {
-             meta = {};
-             error = resp.statusText;
-         }
-         return {
-			id: strat.id,
-			name: meta.name,
-			short_description: meta.short_description,
-			long_description: meta.long_description,
-			icon_url: meta.icon_url,
-			config: strat,
-			link: `/strategy/${strats[0].id}`,
-			started_at: meta.started_at,
-            error: error,
-		}
-    }));
-
+			const resp = await fetch(`${strat.url}/metadata`);
+			let error, meta;
+			if (resp.ok) {
+				meta = await resp.json();
+				error = null;
+			} else {
+				meta = {};
+				error = resp.statusText;
+			}
+			return {
+				id: strat.id,
+				name: meta.name,
+				short_description: meta.short_description,
+				long_description: meta.long_description,
+				icon_url: meta.icon_url,
+				config: strat,
+				link: `/strategy/${strats[0].id}`,
+				started_at: meta.started_at,
+				error: error
+			};
+		})
+	);
 }
 
 /**
@@ -83,17 +85,18 @@ export async function getStrategiesWithMetedata(strats: StrategyConfiguration[],
  */
 export async function getConfiguredStrategiesWithMetadata(fetch): Promise<StrategyMetadata[]> {
 	const strats = getConfiguredStrategies();
-    return getStrategiesWithMetedata(strats, fetch);
-
+	return getStrategiesWithMetedata(strats, fetch);
 }
-
 
 /**
  * Get metadata for a single strategy
  *
  * @param strategyConfig
  */
-export async function getStrategyMetadata(strategyConfig: StrategyConfiguration, fetch): Promise<StrategyMetadata> {
-    const arr = await getStrategiesWithMetedata( [strategyConfig], fetch);
-    return arr[0];
+export async function getStrategyMetadata(
+	strategyConfig: StrategyConfiguration,
+	fetch
+): Promise<StrategyMetadata> {
+	const arr = await getStrategiesWithMetedata([strategyConfig], fetch);
+	return arr[0];
 }

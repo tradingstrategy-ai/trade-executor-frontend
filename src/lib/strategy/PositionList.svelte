@@ -23,12 +23,12 @@ Based on Grid.js and svelte-simple-datatables:
 
 -->
 <script lang="ts">
-    // On-demand CSS
-    import 'gridjs/dist/theme/mermaid.css';
-    import '../styles/gridjs.css';
+	// On-demand CSS
+	import 'gridjs/dist/theme/mermaid.css';
+	import '../styles/gridjs.css';
 
 	// Typescript
-    import Grid from 'gridjs-svelte';
+	import Grid from 'gridjs-svelte';
 	import { html } from 'gridjs';
 
 	import type { Stats, TradingPosition } from '../state/interface';
@@ -41,7 +41,6 @@ Based on Grid.js and svelte-simple-datatables:
 	import { page } from '$app/stores';
 	import { parseStrategyPath } from '../strategy/path';
 	import { currentStrategy } from '../state/store';
-
 
 	/**
 	 * Position raw data as id -> TradingPosition mapping.

@@ -6,50 +6,50 @@
  */
 
 .gridjs-wrapper {
-    box-shadow: 0 1px 3px 0 #F2DFCE, 0 1px 2px 0 black;
-    background: #F2DFCE;
+	box-shadow: 0 1px 3px 0 #f2dfce, 0 1px 2px 0 black;
+	background: #f2dfce;
 }
 
 table.gridjs-table {
-    border-color: #F2DFCE;
+	border-color: #f2dfce;
 }
 
 td.gridjs-td {
-    background: #FFF1E5;
-    border-color: #F2DFCE;
+	background: #fff1e5;
+	border-color: #f2dfce;
 }
 
 th.gridjs-th {
-    background: #F2DFCE;
-    border-color: #F2DFCE;
+	background: #f2dfce;
+	border-color: #f2dfce;
 }
 
 .gridjs-footer {
-    background: #F2DFCE;
-    box-shadow: 0 1px 3px 0 #F2DFCE, 0 1px 2px 0 black;
+	background: #f2dfce;
+	box-shadow: 0 1px 3px 0 #f2dfce, 0 1px 2px 0 black;
 }
 
 .gridjs-table a {
-    color: #458b00;
-    text-decoration: none;
+	color: #458b00;
+	text-decoration: none;
 }
 
 .gridjs-table a:hover {
-    color: #cc0000;
+	color: #cc0000;
 }
 
 .gridjs-pagination .gridjs-pages button,
 .gridjs-pagination .gridjs-pages button:disabled,
 .gridjs-pagination .gridjs-pages button.gridjs-spread {
-    background: #FFF1E5;
-    border: 1px solid #F2DFCE;
+	background: #fff1e5;
+	border: 1px solid #f2dfce;
 }
 
 .gridjs-pagination .gridjs-pages button.gridjs-currentPage {
-    background: #F2DFCE;
+	background: #f2dfce;
 }
 
 input.gridjs-input {
-    background: #FFF1E5;
-    border-color: #F2DFCE;
+	background: #fff1e5;
+	border-color: #f2dfce;
 }

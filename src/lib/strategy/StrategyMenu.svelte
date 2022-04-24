@@ -84,13 +84,13 @@ Display strategy menu in
 </div>
 
 <style>
-    .card {
-        box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
-        padding: 12px;
-    }
+	.card {
+		box-shadow: inset 2px 2px 5px #b8b9be, inset -3px -3px 7px #fff;
+		padding: 12px;
+	}
 
-    .card .nav-link {
-        font-weight: 900;
-        font-size: 0.9rem;
-    }
+	.card .nav-link {
+		font-weight: 900;
+		font-size: 0.9rem;
+	}
 </style>

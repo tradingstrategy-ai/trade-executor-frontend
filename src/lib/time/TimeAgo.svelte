@@ -5,7 +5,7 @@ Display time ago widget.
 -->
 <script lang="ts">
 	// https://github.com/fram-x/assert-ts/issues/23
-    import { assert } from 'assert-ts';
+	import { assert } from 'assert-ts';
 
 	import { formatUnixTimestampAsHours } from '../helpers/formatters';
 

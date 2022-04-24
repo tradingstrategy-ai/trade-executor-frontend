@@ -58,7 +58,7 @@ Usage:
 	}
 </script>
 
-{#if position}
+{#if position && positionStats}
 	<h2>Overview</h2>
 
 	<table class="table">
@@ -140,4 +140,6 @@ Usage:
 	<h2>Trades</h2>
 
 	<TradeList trades={position.trades} {position} />
+{:else}
+	<p>Position data could not be loaded at the moment.</p>
 {/if}

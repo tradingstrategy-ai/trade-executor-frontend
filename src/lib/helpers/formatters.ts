@@ -5,7 +5,6 @@
 // https://github.com/fram-x/assert-ts/issues/23
 import { assert } from 'assert-ts';
 
-
 export function formatKilos(n): string {
 	if (n <= 1000) {
 		return (n / 1000).toLocaleString('en', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
@@ -322,7 +321,7 @@ export function formatUnixTimestampAsDate(ts: number): string {
  * Format UNIX timestamp as hours:minutes
  * @param ts Timestamp in seconds
  */
-export function formatUnixTimestampAsHours(ts: number, newlined = false, seconds= false): string {
+export function formatUnixTimestampAsHours(ts: number, newlined = false, seconds = false): string {
 	if (!ts) {
 		return '---';
 	}
@@ -331,12 +330,17 @@ export function formatUnixTimestampAsHours(ts: number, newlined = false, seconds
 	const day = d.toLocaleDateString('en-us', { day: '2-digit' });
 	const month = d.toLocaleDateString('en-us', { month: '2-digit' });
 	const year = d.toLocaleDateString('en-us', { year: 'numeric' });
-    let time;
-    if(seconds) {
-        time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false, second: '2-digit' });
-    } else {
-        time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false });
-    }
+	let time;
+	if (seconds) {
+		time = d.toLocaleTimeString('en-us', {
+			hour: '2-digit',
+			minute: '2-digit',
+			hour12: false,
+			second: '2-digit'
+		});
+	} else {
+		time = d.toLocaleTimeString('en-us', { hour: '2-digit', minute: '2-digit', hour12: false });
+	}
 
 	if (newlined) {
 		return `${year}-${month}-${day}<br>${time}`;
@@ -380,6 +384,10 @@ export function formatUSDCBalance(web3, b: string, decimals: number): string {
  * @param n
  */
 export function formatProfitability(n: number): string {
+	if (n === undefined || n === null) {
+		return '-';
+	}
+
 	return (
 		(n > 0 ? '▲' : '▼') +
 		(Math.abs(n) * 100).toLocaleString('en', {

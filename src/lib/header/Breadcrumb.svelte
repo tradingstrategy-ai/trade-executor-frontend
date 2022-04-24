@@ -37,12 +37,12 @@ Usage:
 			}
 		];
 
-        if(navInfo.strategyName) {
-            crumbs.push({
+		if (navInfo.strategyName) {
+			crumbs.push({
 				url: navInfo.baseUrl,
 				name: navInfo.strategyName
 			});
-        }
+		}
 
 		if (navInfo.pageName) {
 			crumbs.push({
@@ -79,7 +79,7 @@ Usage:
 				{:else}
 					<span itemprop="item" href={breadcrumb.url} itemtype="http://schema.org/Thing">
 						<span itemprop="name">
-							{breadcrumb.name || "Overview"}
+							{breadcrumb.name || 'Overview'}
 						</span>
 					</span>
 				{/if}

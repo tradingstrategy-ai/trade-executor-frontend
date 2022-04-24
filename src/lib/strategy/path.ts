@@ -41,25 +41,25 @@ export function parseStrategyPath(
 	const pageSegment = segments.at(2);
 	const positionId = page.params.position_id;
 	const baseUrl = `/strategy/${currentStrategy.id}`;
-    let pageName = pageNames[pageSegment];
-    let strategyName = currentStrategy?.name;
+	let pageName = pageNames[pageSegment];
+	let strategyName = currentStrategy?.name;
 	let pageUrl;
 
 	if (positionId) {
-        // Individual position page
+		// Individual position page
 		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}/${positionId}`;
 	} else if (pageSegment) {
-        // Strategy subpages
+		// Strategy subpages
 		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
-	} else if(segments.length >= 2) {
-        // Root for a single strategy
+	} else if (segments.length >= 2) {
+		// Root for a single strategy
 		pageUrl = `/strategy/${currentStrategy.id}`;
 	} else {
-        // Strategies root
-        pageName = "Overview";
-        pageUrl = `/strategy`;
-        strategyName = null;
-    }
+		// Strategies root
+		pageName = 'Overview';
+		pageUrl = `/strategy`;
+		strategyName = null;
+	}
 	return {
 		strategyName,
 		baseUrl,

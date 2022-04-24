@@ -6,15 +6,15 @@ Renders a strategy overview in strategy listing using Bootstrap 4 horizontal car
 Related Bootstrap example: https://getbootstrap.com/docs/4.3/components/card/#horizontal
 -->
 <script lang="ts">
-    import { goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 
 	import type { StrategyMetadata } from './metadata';
 
 	export let strategy: StrategyMetadata;
 
-    function handleClick(e) {
-        goto(strategy.link);
-    }
+	function handleClick(e) {
+		goto(strategy.link);
+	}
 </script>
 
 <div class="card shadow-soft border-light mb-3" style="max-width: 540px;" on:click={handleClick}>
@@ -26,26 +26,24 @@ Related Bootstrap example: https://getbootstrap.com/docs/4.3/components/card/#ho
 			<div class="card-body">
 				<h5 class="card-title">{strategy.name}</h5>
 				<p class="card-text">{strategy.short_description}.</p>
-                <a class="card-link btn btn-sm" href={strategy.link}>View details</a>
+				<a class="card-link btn btn-sm" href={strategy.link}>View details</a>
 			</div>
 		</div>
 	</div>
 </div>
 
-
 <style>
-    .card {
-        cursor: pointer;
-    }
+	.card {
+		cursor: pointer;
+	}
 
-    .col-left {
-        background-size: cover;
-    }
+	.col-left {
+		background-size: cover;
+	}
 
-    .btn {
-        float: right;
-        display: block;
-        margin: 0 1.5em 1.5em 0;
-    }
-
+	.btn {
+		float: right;
+		display: block;
+		margin: 0 1.5em 1.5em 0;
+	}
 </style>

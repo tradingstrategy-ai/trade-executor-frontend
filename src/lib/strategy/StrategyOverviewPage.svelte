@@ -8,14 +8,13 @@ Strategy overview page content
 	import StrategyMenu from 'trade-executor-frontend/strategy/StrategyMenu.svelte';
 	import AssetOverviewCard from 'trade-executor-frontend/strategy/AssetOverviewCard.svelte';
 	import PerformanceOverviewCard from 'trade-executor-frontend/strategy/PerformanceOverviewCard.svelte';
-    import type {StrategyMetadata} from "./metadata";
+	import type { StrategyMetadata } from './metadata';
 
-    export let metadata: StrategyMetadata;
-
+	export let metadata: StrategyMetadata;
 </script>
 
 {#if metadata}
-    <p class="lead">{@html metadata.long_description}</p>
+	<p class="lead">{@html metadata.long_description}</p>
 {/if}
 
 <div class="strategy-menu-mobile">
@@ -29,7 +28,6 @@ Strategy overview page content
 <div class="overview-card-wrapper">
 	<PerformanceOverviewCard />
 </div>
-
 
 <style>
 	.strategy-menu-mobile {

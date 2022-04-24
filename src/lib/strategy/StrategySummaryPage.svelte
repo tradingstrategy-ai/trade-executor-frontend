@@ -3,13 +3,11 @@
 
 Render listing of all configured strategies and their metadata.
 -->
-
 <script lang="ts">
-    import type {StrategyMetadata} from "./metadata";
-    import StrategySummaryCard from "./StrategySummaryCard.svelte";
+	import type { StrategyMetadata } from './metadata';
+	import StrategySummaryCard from './StrategySummaryCard.svelte';
 
 	export let strategies: StrategyMetadata[];
-
 </script>
 
 <div class="container">
