@@ -18,6 +18,10 @@ Strategy overview page content
     <p class="lead">{@html metadata.long_description}</p>
 {/if}
 
+<div class="strategy-menu-mobile">
+	<StrategyMenu />
+</div>
+
 <div class="overview-card-wrapper">
 	<AssetOverviewCard />
 </div>
@@ -26,9 +30,6 @@ Strategy overview page content
 	<PerformanceOverviewCard />
 </div>
 
-<div class="strategy-menu-mobile">
-	<StrategyMenu />
-</div>
 
 <style>
 	.strategy-menu-mobile {

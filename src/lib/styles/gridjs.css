@@ -48,3 +48,8 @@ th.gridjs-th {
 .gridjs-pagination .gridjs-pages button.gridjs-currentPage {
     background: #F2DFCE;
 }
+
+input.gridjs-input {
+    background: #FFF1E5;
+    border-color: #F2DFCE;
+}
