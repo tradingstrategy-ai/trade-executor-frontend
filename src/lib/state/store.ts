@@ -88,7 +88,7 @@ export async function loadStrategyState(id: string, name: string, webhookUrl: st
             resp = await fetch(url);
         } catch(e) {
             console.error("Fetch error", e, e.message);
-            resp = {ok: false, statusText: e.message };
+            resp = {ok: false, status: e.message };
         }
 
 		if (!resp.ok) {
