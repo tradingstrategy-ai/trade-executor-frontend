@@ -24,6 +24,7 @@ The package comes with a demo site with its `.env` configuration file.
 To get started with development do:
 
 ```
+# Edit .env to point the environment to your trade executor instance
 npm run dev
 ```
 

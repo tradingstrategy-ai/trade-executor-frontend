@@ -1,6 +1,8 @@
 <!--
 @component
 
+Generic card component to be used in strategy components.
+
 Add some Bootstrap 4 styles related to the theme.
 -->
 <div class="card card-strategy-overview shadow-soft">

@@ -14,7 +14,7 @@ Render listing of all configured strategies and their metadata.
 	{#if strategies.length > 0}
 		<h1>Trading strategies</h1>
 
-		<p>Currently running trading strategies.</p>
+		<p>Currently available strategies.</p>
 
 		<div class="card-deck">
 			{#each strategies as strategy}

@@ -30,7 +30,7 @@ export interface StrategyMetadata {
 	error?: string;
 }
 
-export async function getStrategiesWithMetedata(
+export async function getStrategiesWithMetadata(
 	strats: StrategyConfiguration[],
 	fetch
 ): Promise<StrategyMetadata[]> {
@@ -54,7 +54,24 @@ export async function getStrategiesWithMetedata(
 		strats.map(async (strat) => {
 			assert(strat.url, `StrategyConfig URL missing: ${strat}`);
 
-			const resp = await fetch(`${strat.url}/metadata`);
+            let resp;
+
+            try {
+                // Because we load from the executor, we need to be able to
+                // catch HTTP 500 from Cloudflare (no CORS headers)
+                // https://github.com/sveltejs/kit/issues/5074
+                resp = await fetch(`${strat.url}/metadata`);
+            } catch(e) {
+                // TypeError: Failed to fetch
+                // but happens only on client-side.
+                // The exception is hard to distinguish from
+                // any other exception, because it lacks metadata
+                // (class name, attributes).
+                console.error("fetch() raised an error", e)
+                // Temporary work around
+                resp = {ok: false, statusText: e.message};
+            }
+
 			let error, meta;
 			if (resp.ok) {
 				meta = await resp.json();
@@ -65,7 +82,7 @@ export async function getStrategiesWithMetedata(
 			}
 			return {
 				id: strat.id,
-				name: meta.name,
+				name: meta.name || strat.name,
 				short_description: meta.short_description,
 				long_description: meta.long_description,
 				icon_url: meta.icon_url,
@@ -85,7 +102,7 @@ export async function getStrategiesWithMetedata(
  */
 export async function getConfiguredStrategiesWithMetadata(fetch): Promise<StrategyMetadata[]> {
 	const strats = getConfiguredStrategies();
-	return getStrategiesWithMetedata(strats, fetch);
+	return getStrategiesWithMetadata(strats, fetch);
 }
 
 /**
@@ -97,6 +114,6 @@ export async function getStrategyMetadata(
 	strategyConfig: StrategyConfiguration,
 	fetch
 ): Promise<StrategyMetadata> {
-	const arr = await getStrategiesWithMetedata([strategyConfig], fetch);
+	const arr = await getStrategiesWithMetadata([strategyConfig], fetch);
 	return arr[0];
 }
