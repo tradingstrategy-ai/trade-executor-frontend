@@ -8,6 +8,8 @@ Render listing of all configured strategies and their metadata.
 	import StrategySummaryCard from './StrategySummaryCard.svelte';
 
 	export let strategies: StrategyMetadata[];
+
+    console.log(strategies);
 </script>
 
 <div class="container">

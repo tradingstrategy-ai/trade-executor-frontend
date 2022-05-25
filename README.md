@@ -45,10 +45,26 @@ npm run dev
 ## Workflow to update routes
 
 [SvelteKit does not support route re-use at the moment](https://stackoverflow.com/questions/71728342/creating-sveltekit-library-with-reusable-routes).
+To update routes in the main application:
 
 - Update routes in `trade-executor-frontend`
 - Copy-paste `routes/strategy` to `frontend` package
 - Update `frontend/package.json` with all dependencies needed to run `trade-executor-frontend`
+
+## Updating strategy executor data
+
+Each strategy executor is its own web server, with own domain.
+
+The executor frontend must have id, name and URL configured for each executor.
+
+For the demo app you can update URLs like this:
+
+```shell
+# Edit scripts/demo.env
+source scripts/demo.env
+echo $VITE_PUBLIC_STRATEGIES
+# Edit .env
+```
 
 ## Release
 
@@ -58,3 +74,5 @@ To make a new release:
 npm run package
 (cd package && npm publish)
 ```
+
+(Releases currently not used, as we directly refer to this package as a Github link).

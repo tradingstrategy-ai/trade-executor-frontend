@@ -81,11 +81,19 @@ export async function loadStrategyState(id: string, name: string, webhookUrl: st
 
 	// Load the state file from the server;
 	try {
-		const resp = await fetch(url);
+
+        let resp;
+
+        try {
+            resp = await fetch(url);
+        } catch(e) {
+            console.error("Fetch error", e, e.message);
+            resp = {ok: false, statusText: e.message };
+        }
 
 		if (!resp.ok) {
 			console.error('Failed to load', url, resp.status);
-			currentStrategy.set({ id, name, state: null, error: resp.statusText });
+			currentStrategy.set({ id, name, state: null, error: resp.status });
 			return;
 		}
 

@@ -44,12 +44,14 @@ Related Bootstrap example: https://getbootstrap.com/docs/4.3/components/card/#ho
 </div>
 
 <style>
+    /* Hint the user cards are clickable */
 	.card:not(.error) {
 		cursor: pointer;
 	}
 
 	.col-left {
 		background-size: cover;
+        min-height: 180px; /* Must be good enough for all images */
 	}
 
 	.btn {

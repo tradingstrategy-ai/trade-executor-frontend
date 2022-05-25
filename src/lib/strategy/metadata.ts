@@ -6,6 +6,7 @@ import { getConfiguredStrategies } from './configuration';
 import type { StrategyConfiguration } from './configuration';
 // https://github.com/fram-x/assert-ts/issues/23
 import { assert } from 'assert-ts';
+import loadError from "../assets/load-error.jpg";
 
 /**
  * Metadata describes strategy information not related to the profit generation.
@@ -26,7 +27,8 @@ export interface StrategyMetadata {
 	// Link to the strategy page, generated on the client side
 	link: string;
 	config: StrategyConfiguration;
-	//
+	// A developer readable reason why the strategy cannot be loaded.
+    // If set the strategy is not accessible.
 	error?: string;
 }
 
@@ -80,14 +82,19 @@ export async function getStrategiesWithMetadata(
 				meta = {};
 				error = resp.statusText;
 			}
+
+            if(meta.id) {
+                assert(strat.id === meta.id, `Mismatch on strategy id. We have ${strat.id}, server has ${meta.id}` );
+            }
+
 			return {
 				id: strat.id,
 				name: meta.name || strat.name,
 				short_description: meta.short_description,
 				long_description: meta.long_description,
-				icon_url: meta.icon_url,
+				icon_url: meta.icon_url || loadError,
 				config: strat,
-				link: `/strategy/${strats[0].id}`,
+				link: `/strategy/${strat.id}`,
 				started_at: meta.started_at,
 				error: error
 			};
