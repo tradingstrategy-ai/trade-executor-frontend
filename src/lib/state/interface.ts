@@ -36,12 +36,41 @@ export interface TradingPosition {
 	position_id: number;
 }
 
+
+/**
+ * Position stats
+ *
+ * https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/statistics.py#L21
+ */
+export interface PositionStatistics {
+
+    calculated_at: number;
+
+    last_valuation_at: number;
+
+    profitability: number;
+
+    profit_usd: number;
+
+    quantity: number;
+
+    value: number;
+}
+
+
+
+export interface Stats {
+	portfolio: any;
+	positions: Record<number, any[]>;
+	closed_positions: Record<number, any>;
+}
+
 /**
  * State profitabiltiy statistics.
  */
 export interface Stats {
 	portfolio: any;
-	positions: Record<number, any[]>;
+	positions: Record<number, PositionStatistics[]>;
 	closed_positions: Record<number, any>;
 }
 

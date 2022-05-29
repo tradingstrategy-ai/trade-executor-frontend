@@ -8,6 +8,7 @@
 
 import type { State } from './store';
 import type { Stats, TradingPosition } from './interface';
+import type {PositionStatistics} from "./interface";
 
 /**
  * Get the latest portfolio statistics.
@@ -27,7 +28,7 @@ export function getPortfolioLatestStats(state?: State): object | null {
  *
  * @return null if state is not loaded
  */
-export function getPositionLatestStats(position_id: number, stats?: Stats): object | null {
+export function getPositionLatestStats(position_id: number, stats?: Stats): PositionStatistics {
 	if (stats) {
 		const positionHistory = stats.positions[position_id];
 		if (positionHistory) {
