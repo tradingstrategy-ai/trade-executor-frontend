@@ -44,10 +44,25 @@ Usage:
 			});
 		}
 
+        // TODO: Cleanup
 		if (navInfo.pageName) {
 			crumbs.push({
+				url: navInfo.positionSegmentUrl,
+				name: navInfo.positionSegmentName,
+			});
+		}
+
+		if (navInfo.positionId) {
+			crumbs.push({
+				url: navInfo.positionUrl,
+				name: `Position ${navInfo.positionId}`
+			});
+		}
+
+		if (navInfo.tradeId) {
+			crumbs.push({
 				url: navInfo.pageUrl,
-				name: navInfo.pageName
+				name: `Trade ${navInfo.tradeId}`
 			});
 		}
 

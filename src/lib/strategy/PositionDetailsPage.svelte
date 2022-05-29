@@ -15,6 +15,9 @@ Usage:
 
     <PositionDetails />
 
+For data structure see
+
+- https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/position.py
 -->
 <script lang="ts">
 	import { page } from '$app/stores';
@@ -36,10 +39,12 @@ Usage:
 	let positionId;
 	let position;
 	let positionStats;
+    let failedTrades;
+    let navInfo;
 
 	$: {
 		if ($portfolio) {
-			const navInfo = parseStrategyPath($currentStrategy, $page);
+			navInfo = parseStrategyPath($currentStrategy, $page);
 			positionId = navInfo.positionId;
 			if (positionKind == PositionKind.open) {
 				position = $portfolio.open_positions[positionId];
@@ -52,6 +57,8 @@ Usage:
 			}
 
 			positionStats = getPositionLatestStats(positionId, $stats);
+
+            failedTrades = Object.values(position.trades).some((t) => { return t.failed_at });
 		} else {
 			position = null;
 		}
@@ -70,6 +77,13 @@ Usage:
 				</a>
 			</td>
 		</tr>
+
+        {#if failedTrades}
+            <tr class="error-row">
+                <th>Errors</th>
+                <td>Failed trades</td>
+            </tr>
+        {/if}
 
 		<tr>
 			<th>Opened</th>
@@ -139,7 +153,13 @@ Usage:
 
 	<h2>Trades</h2>
 
-	<TradeList trades={position.trades} {position} />
+	<TradeList baseUrl={navInfo.pageUrl} trades={position.trades} {position} />
 {:else}
 	<p>Position data could not be loaded at the moment. Position data not available for position #{positionId}</p>
 {/if}
+
+<style>
+    .error-row {
+        color: red;
+    }
+</style>

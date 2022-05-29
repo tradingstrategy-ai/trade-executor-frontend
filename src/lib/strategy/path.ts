@@ -14,7 +14,11 @@ interface StrategyNavigationInfo {
 	pageUrl?: string;
 	pageName: string;
 	segments: string[];
+    positionSegmentName?: string;
+    positionSegmentUrl?: string;
 	positionId?: string;
+    positionUrl?: string;
+    tradeId?: string;
 }
 
 // Map the page slug to longer name.
@@ -40,17 +44,32 @@ export function parseStrategyPath(
 	const segments = page.routeId.split('/');
 	const pageSegment = segments.at(2);
 	const positionId = page.params.position_id;
+    const tradeId = page.params.trade_id;
 	const baseUrl = `/strategy/${currentStrategy.id}`;
 	let pageName = pageNames[pageSegment];
 	let strategyName = currentStrategy?.name;
 	let pageUrl;
+    let positionUrl;
+    let positionSegmentUrl;
+    let positionSegmentName;
 
-	if (positionId) {
+    if (tradeId) {
+        // Individual trade page
+        pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}/${positionId}/trade-${tradeId}`;
+        positionUrl = `/strategy/${currentStrategy.id}/${pageSegment}/${positionId}`;
+        positionSegmentUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
+        positionSegmentName = pageName;
+    } else if (positionId) {
 		// Individual position page
 		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}/${positionId}`;
+        positionUrl = `/strategy/${currentStrategy.id}/${pageSegment}/${positionId}`;
+        positionSegmentUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
+        positionSegmentName = pageName;
 	} else if (pageSegment) {
 		// Strategy subpages
 		pageUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
+        positionSegmentUrl = `/strategy/${currentStrategy.id}/${pageSegment}`;
+        positionSegmentName = pageName;
 	} else if (segments.length >= 2) {
 		// Root for a single strategy
 		pageUrl = `/strategy/${currentStrategy.id}`;
@@ -66,6 +85,10 @@ export function parseStrategyPath(
 		pageUrl,
 		pageName,
 		segments,
-		positionId
+        positionSegmentName,
+        positionSegmentUrl,
+		positionId,
+        positionUrl,
+        tradeId
 	};
 }

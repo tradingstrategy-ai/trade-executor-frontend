@@ -70,6 +70,11 @@ Based on Grid.js and svelte-simple-datatables:
 	 */
 	export let pagination = true;
 
+	/**
+	 * Is quick search enabled
+	 */
+	export let search = false;
+
 	export let sort = '-position_id';
 
 	// Convert position list to suitable format for our presentation
@@ -192,7 +197,7 @@ Based on Grid.js and svelte-simple-datatables:
 </script>
 
 {#if data.length > 0}
-	<Grid search sort pagination={gridJsPagination} {data} columns={gridJsColums} {language} />
+	<Grid {search} sort pagination={gridJsPagination} {data} columns={gridJsColums} {language} />
 {:else}
 	<p>No positions.</p>
 {/if}
