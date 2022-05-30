@@ -23,28 +23,28 @@ For data structure see
 	import { page } from '$app/stores';
 	import { parseStrategyPath } from '../strategy/path';
 	import { currentStrategy, portfolio, stats } from '../state/store';
-    import {PositionKind } from '../state/interface';
-    import type {PositionStatistics} from '../state/interface';
+	import { PositionKind } from '../state/interface';
+	import type { PositionStatistics } from '../state/interface';
 	import {
 		formatUnixTimestampAsHours,
 		formatDuration,
 		formatProfitability,
 		formatDollar,
 		formatAmount,
-        formatTokenAmount
+		formatTokenAmount
 	} from '../helpers/formatters';
 	import { getPositionLatestStats } from '../state/stats';
 	import TradeList from './TradeList.svelte';
-    import {getValueAtOpen, getValueAtPeak, getValueAtClose } from "$lib/state/positionHelpers";
+	import { getValueAtOpen, getValueAtPeak, getValueAtClose } from '$lib/state/positionHelpers';
 
 	export let positionKind: PositionKind;
 
 	let positionId;
 	let position;
 	let currentStats: PositionStatistics;
-    let positionStats: PositionStatistics[];
-    let failedTrades;
-    let navInfo;
+	let positionStats: PositionStatistics[];
+	let failedTrades;
+	let navInfo;
 
 	$: {
 		if ($portfolio) {
@@ -61,9 +61,11 @@ For data structure see
 			}
 
 			currentStats = getPositionLatestStats(positionId, $stats);
-            positionStats = $stats.positions[positionId];
+			positionStats = $stats.positions[positionId];
 
-            failedTrades = Object.values(position.trades).some((t) => { return t.failed_at });
+			failedTrades = Object.values(position.trades).some((t) => {
+				return t.failed_at;
+			});
 		} else {
 			position = null;
 		}
@@ -83,12 +85,12 @@ For data structure see
 			</td>
 		</tr>
 
-        {#if failedTrades}
-            <tr class="error-row">
-                <th>Errors</th>
-                <td>Failed trades</td>
-            </tr>
-        {/if}
+		{#if failedTrades}
+			<tr class="error-row">
+				<th>Errors</th>
+				<td>Failed trades</td>
+			</tr>
+		{/if}
 
 		<tr>
 			<th>Opened</th>
@@ -121,14 +123,14 @@ For data structure see
 			<tr>
 				<th>Value at open</th>
 				<td>
-					{ formatDollar(getValueAtOpen(positionStats)) }
+					{formatDollar(getValueAtOpen(positionStats))}
 				</td>
 			</tr>
 
 			<tr>
 				<th>Value before close</th>
 				<td>
-					{ formatDollar(getValueAtClose(positionStats)) }
+					{formatDollar(getValueAtClose(positionStats))}
 				</td>
 			</tr>
 		{:else}
@@ -148,12 +150,12 @@ For data structure see
 			</tr>
 		{/if}
 
-        <tr>
-            <th>Value (highest)</th>
-            <td>
-                { formatDollar(getValueAtPeak(positionStats)) }
-            </td>
-        </tr>
+		<tr>
+			<th>Value (highest)</th>
+			<td>
+				{formatDollar(getValueAtPeak(positionStats))}
+			</td>
+		</tr>
 
 		<tr>
 			<th>Last revaluation</th>
@@ -167,11 +169,13 @@ For data structure see
 
 	<TradeList baseUrl={navInfo.pageUrl} trades={position.trades} {position} />
 {:else}
-	<p>Position data could not be loaded at the moment. Position data not available for position #{positionId}</p>
+	<p>
+		Position data could not be loaded at the moment. Position data not available for position #{positionId}
+	</p>
 {/if}
 
 <style>
-    .error-row {
-        color: red;
-    }
+	.error-row {
+		color: red;
+	}
 </style>

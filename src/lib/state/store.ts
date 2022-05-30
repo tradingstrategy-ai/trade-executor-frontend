@@ -81,15 +81,14 @@ export async function loadStrategyState(id: string, name: string, webhookUrl: st
 
 	// Load the state file from the server;
 	try {
+		let resp;
 
-        let resp;
-
-        try {
-            resp = await fetch(url);
-        } catch(e) {
-            console.error("Fetch error", e, e.message);
-            resp = {ok: false, status: e.message };
-        }
+		try {
+			resp = await fetch(url);
+		} catch (e) {
+			console.error('Fetch error', e, e.message);
+			resp = { ok: false, status: e.message };
+		}
 
 		if (!resp.ok) {
 			console.error('Failed to load', url, resp.status);

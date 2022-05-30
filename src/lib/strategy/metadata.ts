@@ -6,7 +6,7 @@ import { getConfiguredStrategies } from './configuration';
 import type { StrategyConfiguration } from './configuration';
 // https://github.com/fram-x/assert-ts/issues/23
 import { assert } from 'assert-ts';
-import loadError from "../assets/load-error.jpg";
+import loadError from '../assets/load-error.jpg';
 
 /**
  * Metadata describes strategy information not related to the profit generation.
@@ -28,7 +28,7 @@ export interface StrategyMetadata {
 	link: string;
 	config: StrategyConfiguration;
 	// A developer readable reason why the strategy cannot be loaded.
-    // If set the strategy is not accessible.
+	// If set the strategy is not accessible.
 	error?: string;
 }
 
@@ -56,23 +56,23 @@ export async function getStrategiesWithMetadata(
 		strats.map(async (strat) => {
 			assert(strat.url, `StrategyConfig URL missing: ${strat}`);
 
-            let resp;
+			let resp;
 
-            try {
-                // Because we load from the executor, we need to be able to
-                // catch HTTP 500 from Cloudflare (no CORS headers)
-                // https://github.com/sveltejs/kit/issues/5074
-                resp = await fetch(`${strat.url}/metadata`);
-            } catch(e) {
-                // TypeError: Failed to fetch
-                // but happens only on client-side.
-                // The exception is hard to distinguish from
-                // any other exception, because it lacks metadata
-                // (class name, attributes).
-                console.error("fetch() raised an error", e)
-                // Temporary work around
-                resp = {ok: false, statusText: e.message};
-            }
+			try {
+				// Because we load from the executor, we need to be able to
+				// catch HTTP 500 from Cloudflare (no CORS headers)
+				// https://github.com/sveltejs/kit/issues/5074
+				resp = await fetch(`${strat.url}/metadata`);
+			} catch (e) {
+				// TypeError: Failed to fetch
+				// but happens only on client-side.
+				// The exception is hard to distinguish from
+				// any other exception, because it lacks metadata
+				// (class name, attributes).
+				console.error('fetch() raised an error', e);
+				// Temporary work around
+				resp = { ok: false, statusText: e.message };
+			}
 
 			let error, meta;
 			if (resp.ok) {
@@ -83,9 +83,12 @@ export async function getStrategiesWithMetadata(
 				error = resp.statusText;
 			}
 
-            if(meta.id) {
-                assert(strat.id === meta.id, `Mismatch on strategy id. We have ${strat.id}, server has ${meta.id}` );
-            }
+			if (meta.id) {
+				assert(
+					strat.id === meta.id,
+					`Mismatch on strategy id. We have ${strat.id}, server has ${meta.id}`
+				);
+			}
 
 			return {
 				id: strat.id,

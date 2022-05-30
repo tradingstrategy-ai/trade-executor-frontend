@@ -14,8 +14,8 @@ Display strategy title or id while loading in the strategy layout.
 </script>
 
 <h1>
-    {#if strategyNavigationInfo.tradeId}
-        Trade #{strategyNavigationInfo.tradeId}
+	{#if strategyNavigationInfo.tradeId}
+		Trade #{strategyNavigationInfo.tradeId}
 	{:else if strategyNavigationInfo.positionId}
 		Position #{strategyNavigationInfo.positionId}
 	{:else if strategyNavigationInfo.pageName}

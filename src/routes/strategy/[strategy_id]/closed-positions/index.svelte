@@ -10,5 +10,5 @@
 	columns={{ closed_at: true }}
 	stats={$stats}
 	pagination={true}
-    search={true}
+	search={true}
 />

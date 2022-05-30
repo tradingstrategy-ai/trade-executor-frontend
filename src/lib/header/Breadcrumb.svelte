@@ -44,11 +44,11 @@ Usage:
 			});
 		}
 
-        // TODO: Cleanup
+		// TODO: Cleanup
 		if (navInfo.pageName) {
 			crumbs.push({
 				url: navInfo.positionSegmentUrl,
-				name: navInfo.positionSegmentName,
+				name: navInfo.positionSegmentName
 			});
 		}
 

@@ -27,17 +27,17 @@ For data structure see
 	} from '../helpers/formatters';
 	import { getPositionLatestStats } from '../state/stats';
 	import TradeList from './TradeList.svelte';
-    import {getBlockchainExplorerLink, getChainName} from "$lib/helpers/chain-explorer";
+	import { getBlockchainExplorerLink, getChainName } from '$lib/helpers/chain-explorer';
 
-    export let positionKind: PositionKind;
+	export let positionKind: PositionKind;
 
 	let positionId;
-    let tradeId;
-    let trade;
+	let tradeId;
+	let trade;
 	let position;
 	let positionStats;
-    let failedTrades;
-    let prettyJSON;
+	let failedTrades;
+	let prettyJSON;
 
 	$: {
 		if ($portfolio) {
@@ -52,18 +52,17 @@ For data structure see
 			} else {
 				throw new Error('What?');
 			}
-            tradeId = navInfo.tradeId;
+			tradeId = navInfo.tradeId;
 			trade = position.trades[tradeId];
-            prettyJSON = JSON.stringify(trade, null, "  ");
+			prettyJSON = JSON.stringify(trade, null, '  ');
 		} else {
 			position = null;
-            trade = null;
+			trade = null;
 		}
 	}
 </script>
 
 {#if trade}
-
 	<table class="table">
 		<tr>
 			<th>Pair</th>
@@ -74,69 +73,70 @@ For data structure see
 			</td>
 		</tr>
 
-        <tr>
+		<tr>
 			<th>Executed at</th>
 			<td>{formatUnixTimestampAsHours(trade.executed_at)}</td>
 		</tr>
 
-        <tr>
+		<tr>
 			<th>Expected value</th>
 			<td>{formatDollar(trade.planned_reserve)}</td>
 		</tr>
 
-        <tr>
+		<tr>
 			<th>Expected quantity</th>
 			<td>{formatAmount(trade.planned_quantity)} {trade.pair.quote.token_symbol}</td>
 		</tr>
-
-    </table>
+	</table>
 
 	<h2>Blockchain transactions</h2>
 
-
 	<table class="table">
-        <thead>
-            <tr>
-                <th>Chain</th>
-                <th>Transaction hash</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-			{#each trade.blockchain_transactions as tx }
+		<thead>
+			<tr>
+				<th>Chain</th>
+				<th>Transaction hash</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			{#each trade.blockchain_transactions as tx}
 				<tr>
-                    <td>
-                        {getChainName(tx.chain_id)}
-                    </td>
+					<td>
+						{getChainName(tx.chain_id)}
+					</td>
 
-                    <td>
-                        <a target="_blank" rel="external" href={getBlockchainExplorerLink(tx.chain_id, tx.tx_hash)}>
-                            {tx.tx_hash}
-                        </a>
-                    </td>
+					<td>
+						<a
+							target="_blank"
+							rel="external"
+							href={getBlockchainExplorerLink(tx.chain_id, tx.tx_hash)}
+						>
+							{tx.tx_hash}
+						</a>
+					</td>
 
-                    <td class:error={tx.status == 0} class:success={tx.status==1}>
-                        {#if tx.status}
-                            Succeed
-                        {:else}
-                            Failed: {tx.revert_reason}
-                        {/if}
-                    </td>
-                </tr>
+					<td class:error={tx.status == 0} class:success={tx.status == 1}>
+						{#if tx.status}
+							Succeed
+						{:else}
+							Failed: {tx.revert_reason}
+						{/if}
+					</td>
+				</tr>
 			{/each}
-        </tbody>
-    </table>
+		</tbody>
+	</table>
 
-    <h2>Raw data</h2>
+	<h2>Raw data</h2>
 
-    <pre>{prettyJSON}</pre>
-
+	<pre>{prettyJSON}</pre>
 {:else}
 	<p>Trade data could not be loaded at the moment. Trade data not available for trade #{tradeId}</p>
 {/if}
 
 <style>
-    .error {
-        color: red;
-    }
+	.error {
+		color: red;
+	}
 </style>

@@ -8,7 +8,7 @@
 
 import type { State } from './store';
 import type { Stats, TradingPosition } from './interface';
-import type {PositionStatistics} from "./interface";
+import type { PositionStatistics } from './interface';
 
 /**
  * Get the latest portfolio statistics.

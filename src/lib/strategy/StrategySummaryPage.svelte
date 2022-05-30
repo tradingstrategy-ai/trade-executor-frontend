@@ -9,7 +9,7 @@ Render listing of all configured strategies and their metadata.
 
 	export let strategies: StrategyMetadata[];
 
-    console.log(strategies);
+	console.log(strategies);
 </script>
 
 <div class="container">
