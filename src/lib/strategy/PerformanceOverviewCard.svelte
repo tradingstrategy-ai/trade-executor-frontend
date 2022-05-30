@@ -6,7 +6,7 @@ Display strategy execution overview information as Bootstrap 4 card..
 <script type="ts">
 	import { currentStrategy } from '../state/store';
 	import { getPortfolioLatestStats } from '../state/stats';
-	import { formatDollar } from '$lib/helpers/formatters';
+	import { formatDollar } from '../helpers/formatters';
 	import { determineProfitColourClass } from '../helpers/profit';
 	import StrategyOverviewCard from './StrategyCard.svelte';
 

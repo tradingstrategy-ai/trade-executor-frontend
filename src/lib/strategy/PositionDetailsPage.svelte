@@ -35,7 +35,7 @@ For data structure see
 	} from '../helpers/formatters';
 	import { getPositionLatestStats } from '../state/stats';
 	import TradeList from './TradeList.svelte';
-	import { getValueAtOpen, getValueAtPeak, getValueAtClose } from '$lib/state/positionHelpers';
+	import { getValueAtOpen, getValueAtPeak, getValueAtClose } from '../state/positionHelpers';
 
 	export let positionKind: PositionKind;
 

@@ -27,7 +27,7 @@ For data structure see
 	} from '../helpers/formatters';
 	import { getPositionLatestStats } from '../state/stats';
 	import TradeList from './TradeList.svelte';
-	import { getBlockchainExplorerLink, getChainName } from '$lib/helpers/chain-explorer';
+	import { getBlockchainExplorerLink, getChainName } from '../helpers/chain-explorer';
 
 	export let positionKind: PositionKind;
 
