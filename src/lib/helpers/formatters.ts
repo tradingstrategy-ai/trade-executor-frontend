@@ -4,6 +4,7 @@
 
 // https://github.com/fram-x/assert-ts/issues/23
 import { assert } from 'assert-ts';
+import {PROFITABILITY_THRESHOLD} from "./profit";
 
 export function formatKilos(n): string {
 	if (n <= 1000) {
@@ -87,6 +88,11 @@ export function formatDollar(n: number, minFrag = 2, maxFrag = 2, prefix = '$'):
 	if (n === 0) {
 		return `${prefix}0`;
 	}
+
+    if(typeof n == "string") {
+        // Server-side decimals as strings
+        n = parseFloat(n);
+    }
 
 	if (n < 0.000001) {
 		return (
@@ -388,8 +394,17 @@ export function formatProfitability(n: number): string {
 		return '-';
 	}
 
+    let symbol
+    if(Math.abs(n) < PROFITABILITY_THRESHOLD) {
+        symbol = "▪️ "
+    } else if(n > 0) {
+        symbol = '▲ '
+    } else {
+        symbol = '▼ '
+    }
+
 	return (
-		(n > 0 ? '▲' : '▼') +
+		symbol +
 		(Math.abs(n) * 100).toLocaleString('en', {
 			minimumFractionDigits: 1,
 			maximumFractionDigits: 1
