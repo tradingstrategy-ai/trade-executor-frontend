@@ -1,4 +1,3 @@
-
 // we need move needle 0.25% before calling it moving
 export const PROFITABILITY_THRESHOLD = 0.0025;
 
@@ -20,5 +19,3 @@ export function determineProfitColourClass(profit: number): string {
 		return 'profit-red';
 	}
 }
-
-
