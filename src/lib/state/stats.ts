@@ -6,8 +6,7 @@
  * For statistics structure see: https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/statistics.py
  */
 
-import type { State } from './store';
-import type { Stats, TradingPosition } from './interface';
+import type { State, Stats, TradingPosition } from './interface';
 import type { PositionStatistics } from './interface';
 
 /**
