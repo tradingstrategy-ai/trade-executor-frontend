@@ -16,6 +16,10 @@ const config = {
 			allowed: ['PATCH', 'DELETE']
 		},
 
+		package: {
+			exports: (filepath) => !/^_|\/_|\.d\.ts|\.svelte$/.test(filepath)
+		},
+
 		vite: {
 			resolve: {
 				alias: {
