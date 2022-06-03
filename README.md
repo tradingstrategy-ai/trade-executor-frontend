@@ -66,39 +66,15 @@ echo $VITE_PUBLIC_STRATEGIES
 # Edit .env
 ```
 
-## Release
+## Tag & Pubish Package
 
-To make a new release…
-
-### Update version number tag
+To make a new release, update the version number and create a tag:
 
 ```shell
 npm version [major | minor | patch]
-npm push
-npm push --tags
+git push
+git push --tags
 ```
 
-### Publish package to GitHub package registry
-
-**TODO:** add a GitHub action to automatically package and publish a release
-when a new tag is pushed.
-
-In order to publish the package, you'll need to log into the GitHub package
-registry using a Personal Access Token (PAT). Follow the instructions outlined
-[here](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry#authenticating-with-a-personal-access-token)
-
-```shell
-npm login --scope-@tradingstrategy-ai --registry=https://npm.pkg.github.com
-
-> Username: USERNAME
-> Password: TOKEN
-> Email: PUBLIC-EMAIL-ADDRESS
-```
-
-You should only need to do this once (until your PAT expires). Once you're
-authenticated, you can publish the new package:
-
-```
-npm run package
-(cd package && npm publish)
-```
+Pushing the tag will trigger the `publish.yml` GitHub action to run, which automatically
+packages and publishes the new version to the GitHub package registry.
