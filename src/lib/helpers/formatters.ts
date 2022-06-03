@@ -441,14 +441,12 @@ export function formatDuration(seconds): string {
  * @param n
  */
 export function formatBPS(n: number): string {
+	if (!n) {
+		return '---';
+	}
 
-    if(!n) {
-        return "---";
-    }
-
-	return (
-		(Math.abs(n) * 10000).toLocaleString('en', {
-			minimumFractionDigits: 0,
-			maximumFractionDigits: 0
-		}));
+	return (Math.abs(n) * 10000).toLocaleString('en', {
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 0
+	});
 }
