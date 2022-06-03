@@ -23,10 +23,9 @@ For data structure see
 		formatDuration,
 		formatProfitability,
 		formatDollar,
-		formatAmount
+		formatAmount,
+        formatBPS
 	} from '../helpers/formatters';
-	import { getPositionLatestStats } from '../state/stats';
-	import TradeList from './TradeList.svelte';
 	import { getBlockchainExplorerLink, getChainName } from '../helpers/chain-explorer';
 
 	export let positionKind: PositionKind;
@@ -38,6 +37,9 @@ For data structure see
 	let positionStats;
 	let failedTrades;
 	let prettyJSON;
+
+    // Do we show raw data
+    export let rawDisplay = false;
 
 	$: {
 		if ($portfolio) {
@@ -87,6 +89,32 @@ For data structure see
 			<th>Expected quantity</th>
 			<td>{formatAmount(trade.planned_quantity)} {trade.pair.quote.token_symbol}</td>
 		</tr>
+
+        <tr>
+			<th>Slippage tolerance</th>
+			<td>{formatBPS(trade.planned_max_slippage)} BPS</td>
+		</tr>
+
+		<tr>
+			<th>Realised value</th>
+			<td>{formatDollar(trade.executed_reserve)}</td>
+		</tr>
+
+		<tr>
+			<th>Realised quantity</th>
+			<td>{formatAmount(trade.executed_quantity)} {trade.pair.quote.token_symbol}</td>
+		</tr>
+
+		<tr>
+			<th>Liquidity provider fees</th>
+			<td>N/A</td>
+		</tr>
+
+		<tr>
+			<th>Gas fees</th>
+			<td>N/A</td>
+		</tr>
+
 	</table>
 
 	<h2>Blockchain transactions</h2>
@@ -130,7 +158,18 @@ For data structure see
 
 	<h2>Raw data</h2>
 
-	<pre>{prettyJSON}</pre>
+    {#if rawDisplay}
+        <pre style:display={rawDisplay}>{prettyJSON}</pre>
+        {:else}
+        <div>
+            <p>
+                Display low technical details of this trade.
+            </p>
+
+            <button class="btn" on:click={() => rawDisplay = true }>Show details</button>
+        </div>
+
+    {/if}
 {:else}
 	<p>Trade data could not be loaded at the moment. Trade data not available for trade #{tradeId}</p>
 {/if}

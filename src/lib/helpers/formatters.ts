@@ -432,3 +432,23 @@ export function formatDuration(seconds): string {
 		return `${hours}h ${minutes}m`;
 	}
 }
+
+/**
+ * Format basis points (BPS)
+ *
+ * No unit suffix added.
+ *
+ * @param n
+ */
+export function formatBPS(n: number): string {
+
+    if(!n) {
+        return "---";
+    }
+
+	return (
+		(Math.abs(n) * 10000).toLocaleString('en', {
+			minimumFractionDigits: 0,
+			maximumFractionDigits: 0
+		}));
+}
