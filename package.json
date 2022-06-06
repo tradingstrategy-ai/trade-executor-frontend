@@ -1,6 +1,12 @@
 {
-	"name": "trade-executor-frontend",
-	"version": "0.0.1",
+	"name": "@tradingstrategy-ai/trade-executor-frontend",
+	"version": "0.1.1",
+	"type": "module",
+	"svelte": "index.js",
+	"repository": "github:tradingstrategy-ai/trade-executor-frontend",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
+	},
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
@@ -33,7 +39,6 @@
 		"tslib": "^2.3.1",
 		"typescript": "~4.6.2"
 	},
-	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.0",
 		"@lukeed/uuid": "^2.0.0",

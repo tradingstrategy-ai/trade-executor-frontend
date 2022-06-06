@@ -66,13 +66,15 @@ echo $VITE_PUBLIC_STRATEGIES
 # Edit .env
 ```
 
-## Release
+## Tag & Pubish Package
 
-To make a new release:
+To make a new release, update the version number and create a tag:
 
 ```shell
-npm run package
-(cd package && npm publish)
+npm version [major | minor | patch]
+git push
+git push --tags
 ```
 
-(Releases currently not used, as we directly refer to this package as a Github link).
+Pushing the tag will trigger the `publish.yml` GitHub action to run, which automatically
+packages and publishes the new version to the GitHub package registry.

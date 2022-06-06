@@ -5,9 +5,9 @@ Strategy overview page content
 
 -->
 <script lang="ts">
-	import StrategyMenu from 'trade-executor-frontend/strategy/StrategyMenu.svelte';
-	import AssetOverviewCard from 'trade-executor-frontend/strategy/AssetOverviewCard.svelte';
-	import PerformanceOverviewCard from 'trade-executor-frontend/strategy/PerformanceOverviewCard.svelte';
+	import StrategyMenu from './StrategyMenu.svelte';
+	import AssetOverviewCard from './AssetOverviewCard.svelte';
+	import PerformanceOverviewCard from './PerformanceOverviewCard.svelte';
 	import type { StrategyMetadata } from './metadata';
 
 	export let metadata: StrategyMetadata;
