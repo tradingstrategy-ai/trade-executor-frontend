@@ -13,5 +13,11 @@ export const strategyConfig = ((env) => {
 		return null;
 	}
 
-	return JSON.parse(strategiesJSON as string);
+    try {
+        return JSON.parse(strategiesJSON as string);
+    } catch(e) {
+        console.error("Could not parse VITE_PUBLIC_STRATEGIES env JSON, content is ", strategiesJSON);
+        throw e;
+    }
+
 })(import.meta.env);
