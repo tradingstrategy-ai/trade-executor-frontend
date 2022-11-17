@@ -15,11 +15,11 @@ const config = {
 
 		env: {
 			publicPrefix: 'TS_PUBLIC_'
-		},
-
-		package: {
-			exports: (filepath) => !/^_|\/_|\.d\.ts|\.svelte$/.test(filepath)
 		}
+	},
+
+	package: {
+		exports: (filepath) => !/^_|\/_|\.d\.ts|\.svelte$/.test(filepath)
 	},
 
 	preprocess: preprocess()
