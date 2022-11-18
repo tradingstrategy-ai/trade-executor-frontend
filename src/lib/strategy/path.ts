@@ -41,8 +41,8 @@ export function parseStrategyPath(
 ): StrategyNavigationInfo {
 	assert(currentStrategy, 'currentStrategy is null');
 
-	const segments = page.routeId.split('/');
-	const pageSegment = segments.at(2);
+	const segments = page.url.pathname.split('/');
+	const pageSegment = segments[3];
 	const positionId = page.params.position_id;
 	const tradeId = page.params.trade_id;
 	const baseUrl = `/strategy/${currentStrategy.id}`;
