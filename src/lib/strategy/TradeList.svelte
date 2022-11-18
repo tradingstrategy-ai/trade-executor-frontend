@@ -9,7 +9,7 @@ Usage:
 
     <TradeList trades={trades} />
 
-Based on Grid.js and svelte-simple-datatables:
+Based on Grid.js:
 - https://gridjs.io/
 - https://github.com/grid-js/gridjs
 - https://github.com/iamyuu/gridjs-svelte
