@@ -62,7 +62,7 @@ For the demo app you can update URLs like this:
 ```shell
 # Edit scripts/demo.env
 source scripts/demo.env
-echo $VITE_PUBLIC_STRATEGIES
+echo $TS_PUBLIC_STRATEGIES
 # Edit .env
 ```
 
