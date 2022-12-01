@@ -27,7 +27,8 @@ const pageNames = {
 	'open-positions': 'Open positions',
 	'closed-positions': 'Closed positions',
 	'frozen-positions': 'Frozen positions',
-	logs: 'Logs'
+	logs: 'Logs',
+	instance: 'Instance status'
 };
 
 /**

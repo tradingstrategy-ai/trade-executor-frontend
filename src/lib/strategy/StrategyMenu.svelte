@@ -62,7 +62,11 @@ Display strategy menu in
 		{/if}
 
 		<li class="nav-item">
-			<a class="nav-link" href="{baseUrl}/logs"> Logs </a>
+			<a class="nav-link" href="{baseUrl}/instance">Instance status</a>
+		</li>
+
+		<li class="nav-item">
+			<a class="nav-link" href="{baseUrl}/logs">Logs</a>
 		</li>
 
 		<!--
