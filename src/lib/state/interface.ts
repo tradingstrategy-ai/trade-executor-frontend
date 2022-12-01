@@ -7,6 +7,8 @@
  *
  */
 
+type UnixTimestamp = number;
+
 /**
  * Used to differetiate different position types in UI logic
  */
@@ -91,4 +93,6 @@ export interface Portfolio {
 export interface State {
 	portfolio: any;
 	stats: Stats;
+	cycle: number;
+	created_at: UnixTimestamp;
 }
