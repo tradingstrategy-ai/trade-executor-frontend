@@ -370,6 +370,10 @@ export function formatUrlAsDomain(u: string): string {
  *
  */
 export function formatDatetime(d: Date): string {
+	if (!d) {
+		return '---';
+	}
+
 	const s = d.toLocaleString('en-GB', { timeZone: 'UTC' });
 	return s + ' UTC';
 }

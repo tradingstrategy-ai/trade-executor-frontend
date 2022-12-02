@@ -61,12 +61,15 @@ Display strategy menu in
 			</li>
 		{/if}
 
-		<!--
-
 		<li class="nav-item">
-			<a class="nav-link" href="#">Deposits and withdraws</a>
+			<a class="nav-link" href="{baseUrl}/instance">Instance status</a>
 		</li>
 
+		<li class="nav-item">
+			<a class="nav-link" href="{baseUrl}/logs">Logs</a>
+		</li>
+
+		<!--
 		<li class="nav-item">
 			<a class="nav-link" href="#">Strategy source</a>
 		</li>

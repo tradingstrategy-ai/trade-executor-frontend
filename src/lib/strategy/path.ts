@@ -26,7 +26,9 @@ interface StrategyNavigationInfo {
 const pageNames = {
 	'open-positions': 'Open positions',
 	'closed-positions': 'Closed positions',
-	'frozen-positions': 'Frozen positions'
+	'frozen-positions': 'Frozen positions',
+	logs: 'Logs',
+	instance: 'Instance status'
 };
 
 /**
