@@ -8,49 +8,57 @@ import type { StrategyConfiguration } from './configuration';
 import { assert } from 'assert-ts';
 import loadError from '../assets/load-error.jpg';
 
+type Nullable<Type> = Type | null;
+type PerformanceTuple = [number, number];
+
+/**
+ * StrategySummaryStatistics describes summary-level performance metrics for a strategy.
+ *
+ * See https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/strategy/summary.py
+ */
+export interface StrategySummaryStatistics {
+	calculated_at: number;
+	first_trade_at: Nullable<number>;
+	last_trade_at: Nullable<number>;
+	enough_data: Nullable<boolean>;
+	current_value: Nullable<number>;
+	profitability_90_days: Nullable<number>;
+	performance_chart_90_days: Nullable<PerformanceTuple[]>;
+}
+
 /**
  * Metadata describes strategy information not related to the profit generation.
  *
- * This is bits like name, description, icon and executor uptime.
- *
- * TypeScript helper for having frontend side configuration for strategies.
+ * This includes properties provided by the backend API, augmented with additional properties
+ * client-side (e.g., link, config, error).
  *
  * See https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/metadata.py
  */
 export interface StrategyMetadata {
+	// From strategy config object
 	id: string;
-	name?: string;
-	short_description?: string;
-	long_description?: string;
-	icon_url?: string;
-	started_at?: number;
-	// Link to the strategy page, generated on the client side
+	// From backend API
+	name: string;
+	short_description: Nullable<string>;
+	long_description: Nullable<string>;
+	icon_url: string;
+	started_at: number;
+	executor_running: boolean;
+	summary_statistics: StrategySummaryStatistics;
+	// Client-side augmented values
+	// - Link to the strategy page, generated on the client side
 	link: string;
+	// - The client-side strategy config object
 	config: StrategyConfiguration;
-	// A developer readable reason why the strategy cannot be loaded.
-	// If set the strategy is not accessible.
-	error?: string;
+	// - A developer readable reason why the strategy cannot be loaded.
+	// - If set the strategy is not accessible.
+	error: Nullable<string>;
 }
 
 export async function getStrategiesWithMetadata(
 	strats: StrategyConfiguration[],
 	fetch
 ): Promise<StrategyMetadata[]> {
-	/*
-	const exampleData = [
-		{
-			id: strats[0].id,
-			name: 'Data collection test strategy',
-			short_description: 'Test',
-			long_description: 'Test',
-			icon_url:
-				'https://upload.wikimedia.org/wikipedia/commons/4/43/Blueberry_pancakes_%283%29.jpg',
-			config: strats[0],
-			link: `/strategy/${strats[0].id}`,
-			started_at: 0
-		}
-	];*/
-
 	// Load metadata for all strategies parallel
 	return await Promise.all(
 		strats.map(async (strat) => {
@@ -96,10 +104,12 @@ export async function getStrategiesWithMetadata(
 				short_description: meta.short_description,
 				long_description: meta.long_description,
 				icon_url: meta.icon_url || loadError,
+				started_at: meta.started_at,
+				executor_running: meta.executor_running,
+				summary_statistics: meta.summary_statistics,
 				config: strat,
 				link: `/strategy/${strat.id}`,
-				started_at: meta.started_at,
-				error: error
+				error
 			};
 		})
 	);
