@@ -5,4 +5,4 @@
 	export let data: PageData;
 </script>
 
-<StrategyOverviewPage metadata={data.metadata} />
+<StrategyOverviewPage strategy={data.strategy} />

@@ -1,5 +1,5 @@
 /**
- * Strategy metadata fetching.
+ * Strategy runtime state fetching.
  */
 
 import { getConfiguredStrategies } from './configuration';
@@ -27,14 +27,14 @@ export interface StrategySummaryStatistics {
 }
 
 /**
- * Metadata describes strategy information not related to the profit generation.
+ * RuntimeState describes strategy information not related to the profit generation.
  *
  * This includes properties provided by the backend API, augmented with additional properties
  * client-side (e.g., link, config, error).
  *
  * See https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/metadata.py
  */
-export interface StrategyMetadata {
+export interface StrategyRuntimeState {
 	// From strategy config object
 	id: string;
 	// From backend API
@@ -55,11 +55,11 @@ export interface StrategyMetadata {
 	error: Nullable<string>;
 }
 
-export async function getStrategiesWithMetadata(
+export async function getStrategiesWithRuntimeState(
 	strats: StrategyConfiguration[],
 	fetch
-): Promise<StrategyMetadata[]> {
-	// Load metadata for all strategies parallel
+): Promise<StrategyRuntimeState[]> {
+	// Load runtime state for all strategies parallel
 	return await Promise.all(
 		strats.map(async (strat) => {
 			assert(strat.url, `StrategyConfig URL missing: ${strat}`);
@@ -82,31 +82,31 @@ export async function getStrategiesWithMetadata(
 				resp = { ok: false, statusText: e.message };
 			}
 
-			let error, meta;
+			let error, payload;
 			if (resp.ok) {
-				meta = await resp.json();
+				payload = await resp.json();
 				error = null;
 			} else {
-				meta = {};
+				payload = {};
 				error = resp.statusText;
 			}
 
-			if (meta.id) {
+			if (payload.id) {
 				assert(
-					strat.id === meta.id,
-					`Mismatch on strategy id. We have ${strat.id}, server has ${meta.id}`
+					strat.id === payload.id,
+					`Mismatch on strategy id. We have ${strat.id}, server has ${payload.id}`
 				);
 			}
 
 			return {
 				id: strat.id,
-				name: meta.name || strat.name,
-				short_description: meta.short_description,
-				long_description: meta.long_description,
-				icon_url: meta.icon_url || loadError,
-				started_at: meta.started_at,
-				executor_running: meta.executor_running,
-				summary_statistics: meta.summary_statistics,
+				name: payload.name || strat.name,
+				short_description: payload.short_description,
+				long_description: payload.long_description,
+				icon_url: payload.icon_url || loadError,
+				started_at: payload.started_at,
+				executor_running: payload.executor_running,
+				summary_statistics: payload.summary_statistics,
 				config: strat,
 				link: `/strategy/${strat.id}`,
 				error
@@ -116,24 +116,26 @@ export async function getStrategiesWithMetadata(
 }
 
 /**
- * Get list of configured strategies and pings server for the latest metadata.
+ * Get list of configured strategies and pings server for the latest runtime state.
  *
  * Typedefs JSON load from the config.
  */
-export async function getConfiguredStrategiesWithMetadata(fetch): Promise<StrategyMetadata[]> {
+export async function getConfiguredStrategiesWithRuntimeState(
+	fetch
+): Promise<StrategyRuntimeState[]> {
 	const strats = getConfiguredStrategies();
-	return getStrategiesWithMetadata(strats, fetch);
+	return getStrategiesWithRuntimeState(strats, fetch);
 }
 
 /**
- * Get metadata for a single strategy
+ * Get runtime state for a single strategy
  *
  * @param strategyConfig
  */
-export async function getStrategyMetadata(
+export async function getStrategyRuntimeState(
 	strategyConfig: StrategyConfiguration,
 	fetch
-): Promise<StrategyMetadata> {
-	const arr = await getStrategiesWithMetadata([strategyConfig], fetch);
+): Promise<StrategyRuntimeState> {
+	const arr = await getStrategiesWithRuntimeState([strategyConfig], fetch);
 	return arr[0];
 }

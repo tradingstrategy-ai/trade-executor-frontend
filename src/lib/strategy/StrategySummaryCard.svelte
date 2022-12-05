@@ -8,9 +8,9 @@ Related Bootstrap example: https://getbootstrap.com/docs/4.3/components/card/#ho
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import type { StrategyMetadata } from './metadata';
+	import type { StrategyRuntimeState } from './runtimeState';
 
-	export let strategy: StrategyMetadata;
+	export let strategy: StrategyRuntimeState;
 
 	function handleClick(e) {
 		if (strategy.error) {
