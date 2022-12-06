@@ -1,13 +1,13 @@
 <!--
 @component
 
-Render listing of all configured strategies and their metadata.
+Render listing of all configured strategies and their runtime state.
 -->
 <script lang="ts">
-	import type { StrategyMetadata } from './metadata';
+	import type { StrategyRuntimeState } from './runtimeState';
 	import StrategySummaryCard from './StrategySummaryCard.svelte';
 
-	export let strategies: StrategyMetadata[];
+	export let strategies: StrategyRuntimeState[];
 
 	console.log(strategies);
 </script>

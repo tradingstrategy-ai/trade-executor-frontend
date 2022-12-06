@@ -8,13 +8,13 @@ Strategy overview page content
 	import StrategyMenu from './StrategyMenu.svelte';
 	import AssetOverviewCard from './AssetOverviewCard.svelte';
 	import PerformanceOverviewCard from './PerformanceOverviewCard.svelte';
-	import type { StrategyMetadata } from './metadata';
+	import type { StrategyRuntimeState } from './runtimeState';
 
-	export let metadata: StrategyMetadata;
+	export let strategy: StrategyRuntimeState;
 </script>
 
-{#if metadata}
-	<p class="lead">{@html metadata.long_description}</p>
+{#if strategy}
+	<p class="lead">{@html strategy.long_description}</p>
 {/if}
 
 <div class="strategy-menu-mobile">
