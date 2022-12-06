@@ -28,7 +28,9 @@ const pageNames = {
 	'closed-positions': 'Closed positions',
 	'frozen-positions': 'Frozen positions',
 	logs: 'Logs',
-	instance: 'Instance status'
+	instance: 'Instance status',
+	source: 'Source code',
+	'decision-making': 'Decision making'
 };
 
 /**
