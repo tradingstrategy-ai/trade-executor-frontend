@@ -30,6 +30,7 @@ const pageNames = {
 	logs: 'Logs',
 	instance: 'Instance status',
 	source: 'Source code',
+	performance: 'Performance',
 	'decision-making': 'Decision making'
 };
 

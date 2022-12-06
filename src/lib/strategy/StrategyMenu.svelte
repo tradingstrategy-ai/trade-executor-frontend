@@ -62,6 +62,10 @@ Display strategy menu in
 		{/if}
 
 		<li class="nav-item">
+			<a class="nav-link" href="{baseUrl}/performance">Performance</a>
+		</li>
+
+		<li class="nav-item">
 			<a class="nav-link" href="{baseUrl}/decision-making">Decision making</a>
 		</li>
 
