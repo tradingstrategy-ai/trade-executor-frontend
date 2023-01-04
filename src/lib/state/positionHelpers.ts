@@ -5,8 +5,8 @@ import type { PositionStatistics } from './interface';
  *
  * @param stats
  */
-export function getValueAtOpen(stats: PositionStatistics[]): number {
-	return stats[0].value;
+export function getValueAtOpen(stats: PositionStatistics[]): number | undefined {
+	return stats[0]?.value;
 }
 
 /**
@@ -14,10 +14,10 @@ export function getValueAtOpen(stats: PositionStatistics[]): number {
  *
  * @param stats
  */
-export function getValueAtClose(stats: PositionStatistics[]): number {
+export function getValueAtClose(stats: PositionStatistics[]): number | undefined {
 	// At -1 we have updated the position value after close, it is zero if it was properly closed
 	// At -2 we have the last valuation before performing the closing the
-	return stats.at(-2).value;
+	return stats.at(-2)?.value;
 }
 
 /**
@@ -25,10 +25,7 @@ export function getValueAtClose(stats: PositionStatistics[]): number {
  *
  * @param stats
  */
-export function getValueAtPeak(stats: PositionStatistics[]): number {
-	return Math.max(
-		...stats.map((s) => {
-			return s.value;
-		})
-	);
+export function getValueAtPeak(stats: PositionStatistics[]): number | undefined {
+	const maxValue = Math.max(...stats.map((s) => s.value));
+	return Number.isFinite(maxValue) ? maxValue : undefined;
 }
