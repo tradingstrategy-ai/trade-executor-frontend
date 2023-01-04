@@ -74,25 +74,20 @@ export function formatDownloadLink(validApiKey, key, link) {
  *
  * Crypto prices can vary highly between $1B to $0.00000001.
  * Try to format everything gracefully.
- *
- * @param n
- * @param minFrag
- * @param maxFrag
  */
-export function formatDollar(n: number, minFrag = 2, maxFrag = 2, prefix = '$'): string {
-	if (n === undefined || n === null) {
-		// Plz avoid ending here
-		return '---';
-	}
+export function formatDollar(
+	n: number | string | undefined,
+	minFrag = 2,
+	maxFrag = 2,
+	prefix = '$'
+): string {
+	// Server-side decimals as strings
+	if (typeof n === 'string') n = parseFloat(n);
 
-	if (n === 0) {
-		return `${prefix}0`;
-	}
+	// Plz avoid ending here
+	if (!Number.isFinite(n)) return '---';
 
-	if (typeof n == 'string') {
-		// Server-side decimals as strings
-		n = parseFloat(n);
-	}
+	if (n === 0) return `${prefix}0`;
 
 	if (n < 0.000001) {
 		return (

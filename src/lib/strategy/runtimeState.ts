@@ -84,8 +84,13 @@ export async function getStrategiesWithRuntimeState(
 
 			let error, payload;
 			if (resp.ok) {
-				payload = await resp.json();
-				error = null;
+				try {
+					payload = await resp.json();
+					error = null;
+				} catch (e) {
+					payload = {};
+					error = e.message;
+				}
 			} else {
 				payload = {};
 				error = resp.statusText;
