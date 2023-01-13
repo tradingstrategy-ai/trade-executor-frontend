@@ -36,9 +36,6 @@
 		"vite": "^3.1.0"
 	},
 	"dependencies": {
-		"assert-ts": "^0.3.4",
-		"gridjs": "^5.0.2",
-		"gridjs-svelte": "^2.1.1",
-		"svelte-spinner": "^2.0.2"
+		"assert-ts": "^0.3.4"
 	}
 }
