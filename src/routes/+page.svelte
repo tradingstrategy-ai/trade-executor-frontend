@@ -27,7 +27,9 @@
 
 <style>
 	:global(body) {
+		margin: 0;
 		background: #faecd6;
+		font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	}
 
 	main {
