@@ -1,6 +1,6 @@
 {
 	"name": "@tradingstrategy-ai/trade-executor-frontend",
-	"version": "0.1.2",
+	"version": "0.2.0",
 	"type": "module",
 	"svelte": "index.js",
 	"repository": "github:tradingstrategy-ai/trade-executor-frontend",
