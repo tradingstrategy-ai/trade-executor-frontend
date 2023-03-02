@@ -2,20 +2,13 @@
 export const PROFITABILITY_THRESHOLD = 0.0025;
 
 /**
- * Profit colouring.
+ * Determine profitability above/below threshold
+ * returns -1 (loss) | 0 (neither) | +1 (profit)
  *
- * See routes/__layout.svelte for CSS classes.
- *
- * @param profit Price change as percents
  */
-export function determineProfitColourClass(profit: number): string {
-	if (Math.abs(profit) < PROFITABILITY_THRESHOLD) {
-		return 'proft-black'; // Data not loaded
+export function determineProfitability(value: number | null | undefined): number {
+	if (!value || Math.abs(value) < PROFITABILITY_THRESHOLD) {
+		return 0;
 	}
-
-	if (profit > 0) {
-		return 'profit-green';
-	} else {
-		return 'profit-red';
-	}
+	return Math.sign(value);
 }
