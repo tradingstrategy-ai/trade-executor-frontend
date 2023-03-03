@@ -2,22 +2,44 @@
  * Blockchain explorer link mapping
  */
 
-export function getBlockchainExplorerLink(chainId: number, txHash: string): string {
-	if (chainId == 56) {
-		return `https://bscscan.com/tx/${txHash}`;
-	} else if (chainId == 137) {
-		return `https://polygonscan.com/tx/${txHash}`;
-	} else if (chainId == 1) {
-		return `https://etherscan.com/tx/${txHash}`;
-	}
+interface ChainInfo {
+	id: number;
+	name: string;
+	explorerUrl: string;
 }
 
-export function getChainName(chainId: number): string {
-	if (chainId == 56) {
-		return 'BNB Chain';
-	} else if (chainId == 137) {
-		return 'Polygon';
-	} else if (chainId == 1) {
-		return 'Ethereum';
+const CHAINS: ChainInfo[] = [
+	{
+		id: 1,
+		name: 'Ethereum',
+		explorerUrl: 'https://etherscan.com'
+	},
+	{
+		id: 56,
+		name: 'BNB Chain',
+		explorerUrl: 'https://bscscan.com'
+	},
+	{
+		id: 137,
+		name: 'Polygon',
+		explorerUrl: 'https://polygonscan.com'
+	},
+	{
+		id: 43114,
+		name: 'Avalanche C-chain',
+		explorerUrl: 'https://snowtrace.io'
 	}
+];
+
+export function getChainInfo(chainId: number): ChainInfo | undefined {
+	return CHAINS.find(({ id }) => id === chainId);
+}
+
+export function getChainName(chainId: number): string | undefined {
+	return getChainInfo(chainId)?.name;
+}
+
+export function getChainExplorerLink(chainId: number, txHash: string): string | undefined {
+	const info = getChainInfo(chainId);
+	return info && `${info.explorerUrl}/tx/${txHash}`;
 }
