@@ -6,6 +6,8 @@
 import { assert } from 'assert-ts';
 import { PROFITABILITY_THRESHOLD } from './profit';
 
+const notFilledMarker = '---';
+
 export function formatKilos(n): string {
 	if (n <= 1000) {
 		return (n / 1000).toLocaleString('en', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
@@ -85,7 +87,7 @@ export function formatDollar(
 	if (typeof n === 'string') n = parseFloat(n);
 
 	// Plz avoid ending here
-	if (!Number.isFinite(n)) return '---';
+	if (!Number.isFinite(n)) return notFilledMarker;
 
 	if (n === 0) return `${prefix}0`;
 
@@ -171,7 +173,7 @@ export function formatTokenAmount(x: number, minFrag = 2, maxFrag = 2, prefix = 
 
 	if (n === undefined || n === null) {
 		// Plz avoid ending here
-		return '---';
+		return notFilledMarker;
 	}
 
 	if (n === 0) {
@@ -259,7 +261,7 @@ export function formatPriceChange(n: number): string {
  */
 export function formatAmount(n: number): string {
 	if (!n) {
-		return '---';
+		return notFilledMarker;
 	}
 
 	return n.toLocaleString('en');
@@ -284,7 +286,7 @@ export function parseUTCTime(s: string): number {
  */
 export function formatUnixTimestamp(ts: number): string {
 	if (!ts) {
-		return '---';
+		return notFilledMarker;
 	}
 
 	const d = new Date(ts * 1000);
@@ -297,7 +299,7 @@ export function formatUnixTimestamp(ts: number): string {
  */
 export function formatUnixTimestampAsMonth(ts: number): string {
 	if (!ts) {
-		return '---';
+		return notFilledMarker;
 	}
 
 	const d = new Date(ts * 1000);
@@ -324,7 +326,7 @@ export function formatUnixTimestampAsDate(ts: number): string {
  */
 export function formatUnixTimestampAsHours(ts: number, newlined = false, seconds = false): string {
 	if (!ts) {
-		return '---';
+		return notFilledMarker;
 	}
 
 	const d = new Date(ts * 1000);
@@ -366,7 +368,7 @@ export function formatUrlAsDomain(u: string): string {
  */
 export function formatDatetime(d: Date): string {
 	if (!d) {
-		return '---';
+		return notFilledMarker;
 	}
 
 	const s = d.toLocaleString('en-GB', { timeZone: 'UTC' });
@@ -390,7 +392,7 @@ export function formatUSDCBalance(web3, b: string, decimals: number): string {
  */
 export function formatProfitability(n: number): string {
 	if (n === undefined || n === null) {
-		return '-';
+		return notFilledMarker;
 	}
 
 	let symbol;
@@ -441,7 +443,7 @@ export function formatDuration(seconds): string {
  */
 export function formatBPS(n: number): string {
 	if (!n) {
-		return '---';
+		return notFilledMarker;
 	}
 
 	return (Math.abs(n) * 10000).toLocaleString('en', {
