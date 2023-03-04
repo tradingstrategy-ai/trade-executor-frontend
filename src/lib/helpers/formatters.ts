@@ -6,6 +6,7 @@
 import { assert } from 'assert-ts';
 import { PROFITABILITY_THRESHOLD } from './profit';
 
+type MaybeNumber = number | null | undefined;
 const notFilledMarker = '---';
 
 export function formatKilos(n): string {
@@ -165,16 +166,12 @@ export function formatDollar(
  * @param minFrag
  * @param maxFrag
  */
-export function formatTokenAmount(x: number, minFrag = 2, maxFrag = 2, prefix = ''): string {
-	assert(typeof x == 'number', `Was not a number: ${x}`);
+export function formatTokenAmount(x: MaybeNumber, minFrag = 2, maxFrag = 2, prefix = ''): string {
+	// Plz avoid ending here
+	if (!Number.isFinite(x)) return notFilledMarker;
 
 	// Consider negative quantities
 	const n = Math.abs(x);
-
-	if (n === undefined || n === null) {
-		// Plz avoid ending here
-		return notFilledMarker;
-	}
 
 	if (n === 0) {
 		return `${prefix}0`;
