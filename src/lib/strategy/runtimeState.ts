@@ -10,6 +10,7 @@ import loadError from '../assets/load-error.jpg';
 
 type Nullable<Type> = Type | null;
 type PerformanceTuple = [number, number];
+type Address = `0x${string}`;
 
 /**
  * StrategySummaryStatistics describes summary-level performance metrics for a strategy.
@@ -25,6 +26,37 @@ export interface StrategySummaryStatistics {
 	profitability_90_days: Nullable<number>;
 	performance_chart_90_days: Nullable<PerformanceTuple[]>;
 }
+
+/**
+ * OnChainData types describe metadata related to management of fund assets
+ *
+ * See: https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/metadata.py
+ */
+interface CommonChainData {
+	chain_id: number;
+}
+
+type SmartContracts = Record<string, Address>;
+
+interface EnzymeChainData extends CommonChainData {
+	asset_management_mode: 'enzyme';
+	smart_contracts: SmartContracts & {
+		vault: Address;
+		comptroller: Address;
+		generic_adapter: Address;
+		gas_relay_paymaster_lib: Address;
+		gas_relay_paymaster_factory: Address;
+		integration_manager: Address;
+		fund_value_calculator: Address;
+	};
+}
+
+interface HotWalletChainData extends CommonChainData {
+	asset_management_mode: 'hot_wallet';
+	smart_contracts: SmartContracts;
+}
+
+export type OnChainData = EnzymeChainData | HotWalletChainData;
 
 /**
  * RuntimeState describes strategy information not related to the profit generation.
@@ -44,6 +76,7 @@ export interface StrategyRuntimeState {
 	icon_url: string;
 	started_at: number;
 	executor_running: boolean;
+	on_chain_data: OnChainData;
 	summary_statistics: StrategySummaryStatistics;
 	// Client-side augmented values
 	// - Link to the strategy page, generated on the client side
@@ -112,6 +145,7 @@ export async function getStrategiesWithRuntimeState(
 				started_at: payload.started_at,
 				executor_running: payload.executor_running,
 				summary_statistics: payload.summary_statistics,
+				on_chain_data: payload.on_chain_data,
 				config: strat,
 				link: `/strategy/${strat.id}`,
 				error
