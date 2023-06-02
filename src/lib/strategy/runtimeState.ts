@@ -36,19 +36,34 @@ interface CommonChainData {
 	chain_id: number;
 }
 
-type SmartContracts = Record<string, Address>;
+interface SmartContracts {
+	address_list_registry: Nullable<Address>;
+	comptroller: Nullable<Address>;
+	comptroller_lib: Nullable<Address>;
+	deployer: Nullable<Address>;
+	dispatcher: Nullable<Address>;
+	external_position_factory: Nullable<Address>;
+	external_position_manager: Nullable<Address>;
+	fee_manager: Nullable<Address>;
+	fund_deployer: Nullable<Address>;
+	fund_value_calculator: Nullable<Address>;
+	gas_relay_paymaster_factory: Nullable<Address>;
+	gas_relay_paymaster_lib: Nullable<Address>;
+	generic_adapter: Nullable<Address>;
+	integration_manager: Nullable<Address>;
+	payment_forwarder: Nullable<Address>;
+	policy_manager: Nullable<Address>;
+	protocol_fee_reserve_lib: Nullable<Address>;
+	protocol_fee_reserve_proxy: Nullable<Address>;
+	protocol_fee_tracker: Nullable<Address>;
+	value_interpreter: Nullable<Address>;
+	vault: Nullable<Address>;
+	vault_lib: Nullable<Address>;
+}
 
 interface EnzymeChainData extends CommonChainData {
 	asset_management_mode: 'enzyme';
-	smart_contracts: SmartContracts & {
-		vault: Address;
-		comptroller: Address;
-		generic_adapter: Address;
-		gas_relay_paymaster_lib: Address;
-		gas_relay_paymaster_factory: Address;
-		integration_manager: Address;
-		fund_value_calculator: Address;
-	};
+	smart_contracts: Partial<SmartContracts>;
 }
 
 interface HotWalletChainData extends CommonChainData {
