@@ -82,6 +82,9 @@ export type OnChainData = EnzymeChainData | HotWalletChainData;
  * See https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/metadata.py
  */
 export interface StrategyRuntimeState {
+	// Did we manage to connect to this strategy webhook
+	connected: boolean;
+
 	// From strategy config object
 	id: string;
 	// From backend API
@@ -101,6 +104,8 @@ export interface StrategyRuntimeState {
 	// - A developer readable reason why the strategy cannot be loaded.
 	// - If set the strategy is not accessible.
 	error: Nullable<string>;
+	// The number of frozen positions the strategy currently has
+	frozen_positions: number;
 }
 
 export async function getStrategiesWithRuntimeState(
@@ -113,6 +118,7 @@ export async function getStrategiesWithRuntimeState(
 			assert(strat.url, `StrategyConfig URL missing: ${strat}`);
 
 			let resp;
+			let connected;
 
 			try {
 				// Because we load from the executor, we need to be able to
@@ -135,9 +141,11 @@ export async function getStrategiesWithRuntimeState(
 				try {
 					payload = await resp.json();
 					error = null;
+					connected = true;
 				} catch (e) {
 					payload = {};
 					error = e.message;
+					connected = false;
 				}
 			} else {
 				payload = {};
@@ -152,6 +160,7 @@ export async function getStrategiesWithRuntimeState(
 			}
 
 			return {
+				connected,
 				id: strat.id,
 				name: payload.name || strat.name,
 				short_description: payload.short_description,
@@ -163,7 +172,8 @@ export async function getStrategiesWithRuntimeState(
 				on_chain_data: payload.on_chain_data,
 				config: strat,
 				link: `/strategy/${strat.id}`,
-				error
+				error,
+				frozen_positions: payload.frozen_positions
 			};
 		})
 	);
