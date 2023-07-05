@@ -20,7 +20,7 @@ export function getTradeExecutorErrorHtml(state: StrategyRuntimeState): string |
 	const tradeExecutorId = state.id;
 
 	if (!state.connected) {
-		return `Trade executor offline. Cannot access the strategy statistics currently.`;
+		return `Trade executor offline. Cannot display the strategy statistics.`;
 	} else if (!state.executor_running) {
 		return `Strategy execution is currently paused due to an error. The trade execution engine is waiting for a manual action. 
                 <a href="/strategies/${tradeExecutorId}/status">See instance status page for more information</a>.`;
