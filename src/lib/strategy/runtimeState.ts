@@ -106,6 +106,9 @@ export interface StrategyRuntimeState {
 	error: Nullable<string>;
 	// The number of frozen positions the strategy currently has
 	frozen_positions: number;
+	// Backtest files are available on the server.
+	// Display Backtest menu entry.
+	backtest_available: boolean;
 }
 
 export async function getStrategiesWithRuntimeState(
@@ -173,7 +176,8 @@ export async function getStrategiesWithRuntimeState(
 				config: strat,
 				link: `/strategy/${strat.id}`,
 				error,
-				frozen_positions: payload.frozen_positions
+				frozen_positions: payload.frozen_positions,
+				backtest_available: payload.backtest_available,
 			};
 		})
 	);
