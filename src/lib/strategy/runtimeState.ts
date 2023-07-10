@@ -25,6 +25,8 @@ export interface StrategySummaryStatistics {
 	current_value: Nullable<number>;
 	profitability_90_days: Nullable<number>;
 	performance_chart_90_days: Nullable<PerformanceTuple[]>;
+	return_all_time: Nullable<number>;
+	return_annualised: Nullable<number>;
 }
 
 /**
