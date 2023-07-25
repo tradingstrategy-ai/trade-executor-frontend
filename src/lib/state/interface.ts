@@ -7,7 +7,15 @@
  *
  */
 
-type UnixTimestamp = number;
+export type PrimaryKey = number;
+
+export type UnixTimestamp = number;
+
+export type ChainId = number;
+
+export type BlockNumber = number;
+
+export type HexString = string;
 
 /**
  * Used to differetiate different position types in UI logic
@@ -22,10 +30,25 @@ export enum PositionKind {
  *
  * https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/trade.py
  */
+export interface BlockchainTransaction {
+  type: string;
+  chain_id: ChainId;
+  broadcasted_at: UnixTimestamp;
+  block_number: BlockNumber;
+  tx_hash: HexString;
+  revert_reason: string | null;
+}
+
+/**
+ *
+ * https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/trade.py
+ */
 export interface TradeExecution {
-	trade_id: number;
-	position_id: number;
+  trade_id: PrimaryKey;
+	position_id: PrimaryKey;
+  failed_at: UnixTimestamp;
 	pair: any;
+  blockchain_transactions: BlockchainTransaction[];
 }
 
 /**
@@ -34,8 +57,10 @@ export interface TradeExecution {
  */
 export interface TradingPosition {
 	pair: any;
-	trades: Record<number, TradeExecution>;
-	position_id: number;
+	trades: Record<PrimaryKey, TradeExecution>;
+	position_id: PrimaryKey;
+  frozen_at: UnixTimestamp;
+  unfrozen_at: UnixTimestamp;
 }
 
 /**
