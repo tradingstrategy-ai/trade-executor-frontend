@@ -15,7 +15,7 @@ export type ChainId = number;
 
 export type BlockNumber = number;
 
-export type HexString = string;
+export type HexString = `0x${string}`;
 
 /**
  * Used to differetiate different position types in UI logic
