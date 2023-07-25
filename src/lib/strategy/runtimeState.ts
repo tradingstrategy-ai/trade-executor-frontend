@@ -179,7 +179,7 @@ export async function getStrategiesWithRuntimeState(
 				link: `/strategy/${strat.id}`,
 				error,
 				frozen_positions: payload.frozen_positions,
-				backtest_available: payload.backtest_available,
+				backtest_available: payload.backtest_available
 			};
 		})
 	);

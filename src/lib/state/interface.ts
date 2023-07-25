@@ -31,12 +31,12 @@ export enum PositionKind {
  * https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/trade.py
  */
 export interface BlockchainTransaction {
-  type: string;
-  chain_id: ChainId;
-  broadcasted_at: UnixTimestamp;
-  block_number: BlockNumber;
-  tx_hash: HexString;
-  revert_reason: string | null;
+	type: string;
+	chain_id: ChainId;
+	broadcasted_at: UnixTimestamp;
+	block_number: BlockNumber;
+	tx_hash: HexString;
+	revert_reason: string | null;
 }
 
 /**
@@ -44,11 +44,11 @@ export interface BlockchainTransaction {
  * https://github.com/tradingstrategy-ai/trade-executor/blob/master/tradeexecutor/state/trade.py
  */
 export interface TradeExecution {
-  trade_id: PrimaryKey;
+	trade_id: PrimaryKey;
 	position_id: PrimaryKey;
-  failed_at: UnixTimestamp;
+	failed_at: UnixTimestamp;
 	pair: any;
-  blockchain_transactions: BlockchainTransaction[];
+	blockchain_transactions: BlockchainTransaction[];
 }
 
 /**
@@ -59,8 +59,8 @@ export interface TradingPosition {
 	pair: any;
 	trades: Record<PrimaryKey, TradeExecution>;
 	position_id: PrimaryKey;
-  frozen_at: UnixTimestamp;
-  unfrozen_at: UnixTimestamp;
+	frozen_at: UnixTimestamp;
+	unfrozen_at: UnixTimestamp;
 }
 
 /**
