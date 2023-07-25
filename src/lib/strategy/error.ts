@@ -11,7 +11,7 @@
  *   frozen positions that need manual interventino
  */
 
-import type { StrategyRuntimeState } from '$lib/strategy/runtimeState';
+import type { StrategyRuntimeState } from '$lib/strategy/runtime-state';
 
 /**
  * Get the HTML error message and help link in the case a trade executor is facing an issue.

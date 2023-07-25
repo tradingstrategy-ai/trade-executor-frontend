@@ -1,6 +1,6 @@
 import type { PositionStatistics } from './interface';
 import { describe, test, expect } from 'vitest';
-import { getValueAtOpen, getValueAtClose, getValueAtPeak } from './positionHelpers';
+import { getValueAtOpen, getValueAtClose, getValueAtPeak } from './position-helpers';
 
 describe('getValueAtOpen', () => {
 	test('should return value of first stats element', () => {
