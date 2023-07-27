@@ -82,6 +82,7 @@ export interface PriceStructure {
 export interface TradeExecution {
 	trade_id: PrimaryKey;
 	position_id: PrimaryKey;
+  trade_type: "rebalance" | "stop_loss" | "take_profit";
 
 	pair: TradingPairIdentifier;
 
@@ -95,6 +96,18 @@ export interface TradeExecution {
 	executed_quantity: TokenUnits;
 
 	price_structure: PriceStructure;
+
+  lp_fees_paid?: USDollarValue;
+  lp_fees_estimated: USDollarValue;
+}
+
+export interface TriggerUpdate {
+  timestamp: UnixTimestamp;
+  mid_price: USDollarPrice;
+  stop_loss_before: USDollarPrice;
+  stop_loss_after: USDollarPrice;
+  take_profit_before: USDollarPrice;
+  take_profit_after: USDollarPrice;
 }
 
 /**
@@ -112,6 +125,8 @@ export interface TradingPosition {
 	portfolio_value_at_open: USDollarValue;
 	last_token_price: USDollarPrice;
 	stop_loss: USDollarPrice;
+  trailing_stop_loss_pct: Percent;
+  trigger_updates: TriggerUpdate[];
 }
 
 /**

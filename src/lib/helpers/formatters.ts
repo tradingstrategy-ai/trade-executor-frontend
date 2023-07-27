@@ -166,8 +166,17 @@ export function formatDollar(
  * @param minFrag
  * @param maxFrag
  */
-export function formatTokenAmount(x: MaybeNumber, minFrag = 2, maxFrag = 2, prefix = ''): string {
-	// Plz avoid ending here
+export function formatTokenAmount(x: MaybeNumber | string, minFrag = 2, maxFrag = 2, prefix = ''): string {
+
+  // Token quantities come from the API as strings,
+  // because JavaScript float 64 bit cannot present quantities accurately.
+  // Because we are presenting this number to the user,
+  // the accuracy can be lost here.
+  if(typeof x == "string") {
+    x = parseFloat(x);
+  }
+
+  // Plz avoid ending here
 	if (!Number.isFinite(x)) return notFilledMarker;
 
 	// Consider negative quantities
